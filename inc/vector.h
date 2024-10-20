@@ -3,6 +3,9 @@
 
 #include "type.h"
 
+// INFO: v = vector ; v[size]_[type]
+// INFO: SIMD - v[size]x[multiple]_[type]
+
 // Singed 8 bits
 
 typedef struct v2_i8_s v2_i8_t;
@@ -777,10 +780,362 @@ struct v4_f64_s {
     struct {
       f64_t width;
       f64_t height;
-      f64_t depth;
+      f64_t depth; 
       f64_t spissitude;
     };
   };
 };
+
+// SIMD Floating point 32 bits
+
+struct v2x2_f32 {
+  f32_t x[2];
+  f32_t y[2];
+};
+
+struct v2x4_f32 {
+  f32_t x[4];
+  f32_t y[4];
+};
+
+struct v2x8_f32 {
+  f32_t x[8];
+  f32_t y[8];
+};
+
+struct v2x16_f32 {
+  f32_t x[16];
+  f32_t y[16];
+};
+
+struct v3x2_f32 {
+  f32_t x[2];
+  f32_t y[2];
+  f32_t z[2];
+};
+
+struct v3x4_f32 {
+  f32_t x[4];
+  f32_t y[4];
+  f32_t z[4];
+};
+
+struct v3x8_f32 {
+  f32_t x[8];
+  f32_t y[8];
+  f32_t z[8];
+};
+
+struct v3x16_f32 {
+  f32_t x[16];
+  f32_t y[16];
+  f32_t z[16];
+};
+
+struct v4x2_f32 {
+  f32_t x[2];
+  f32_t y[2];
+  f32_t z[2];
+  f32_t w[2];
+};
+
+struct v4x4_f32 {
+  f32_t x[4];
+  f32_t y[4];
+  f32_t z[4];
+  f32_t w[4];
+};
+
+struct v4x8_f32 {
+  f32_t x[8];
+  f32_t y[8];
+  f32_t z[8];
+  f32_t w[8];
+};
+
+struct v4x16_f32 {
+  f32_t x[16];
+  f32_t y[16];
+  f32_t z[16];
+  f32_t w[16];
+};
+
+// SIMD Floating point 64 bits
+
+struct v2x2_f64 {
+  f64_t x[2];
+  f64_t y[2];
+};
+
+struct v2x4_f64 {
+  f64_t x[4];
+  f64_t y[4];
+};
+
+struct v2x8_f64 {
+  f64_t x[8];
+  f64_t y[8];
+};
+
+struct v2x16_f64 {
+  f64_t x[16];
+  f64_t y[16];
+};
+
+struct v3x2_f64 {
+  f64_t x[2];
+  f64_t y[2];
+  f64_t z[2];
+};
+
+struct v3x4_f64 {
+  f64_t x[4];
+  f64_t y[4];
+  f64_t z[4];
+};
+
+struct v3x8_f64 {
+  f64_t x[8];
+  f64_t y[8];
+  f64_t z[8];
+};
+
+struct v3x16_f64 {
+  f64_t x[16];
+  f64_t y[16];
+  f64_t z[16];
+};
+
+struct v4x2_f64 {
+  f64_t x[2];
+  f64_t y[2];
+  f64_t z[2];
+  f64_t w[2];
+};
+
+struct v4x4_f64 {
+  f64_t x[4];
+  f64_t y[4];
+  f64_t z[4];
+  f64_t w[4];
+};
+
+struct v4x8_f64 {
+  f64_t x[8];
+  f64_t y[8];
+  f64_t z[8];
+  f64_t w[8];
+};
+
+struct v4x16_f64 {
+  f64_t x[16];
+  f64_t y[16];
+  f64_t z[16];
+  f64_t w[16];
+};
+
+// Operation for v2 floating point 32 bits
+
+static __inline__ v2_f32_t v2_f32_add(v2_f32_t a, v2_f32_t b) {
+  return (v2_f32_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y
+  };
+}
+
+static __inline__ v2_f32_t v2_f32_sub(v2_f32_t a, v2_f32_t b) {
+  return (v2_f32_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y
+  };
+}
+
+static __inline__ v2_f32_t v2_f32_mul(v2_f32_t a, v2_f32_t b) {
+  return (v2_f32_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y
+  };
+}
+
+static __inline__ v2_f32_t v2_f32_div(v2_f32_t a, v2_f32_t b) {
+  return (v2_f32_t){
+    .x = a.x / b.x,
+    .y = a.y / b.y
+  };
+}
+
+// Operation for v3 floating point 32 bits
+
+static __inline__ v3_f32_t v3_f32_add(v3_f32_t a, v3_f32_t b) {
+  return (v3_f32_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z
+  };
+}
+
+static __inline__ v3_f32_t v3_f32_sub(v3_f32_t a, v3_f32_t b) {
+  return (v3_f32_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z
+  };
+}
+
+static __inline__ v3_f32_t v3_f32_mul(v3_f32_t a, v3_f32_t b) {
+  return (v3_f32_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z
+  };
+}
+
+static __inline__ v3_f32_t v3_f32_div(v3_f32_t a, v3_f32_t b) {
+  return (v3_f32_t){
+    .x = a.x / b.x,
+    .y = a.y / b.y,
+    .z = a.z / b.z
+  };
+}
+
+// Operation for v4 floating point 32 bits
+
+static __inline__ v4_f32_t v4_f32_add(v4_f32_t a, v4_f32_t b) {
+  return (v4_f32_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z,
+    .w = a.w + b.w
+  };
+}
+
+static __inline__ v4_f32_t v4_f32_sub(v4_f32_t a, v4_f32_t b) {
+  return (v4_f32_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w
+  };
+}
+
+static __inline__ v4_f32_t v4_f32_mul(v4_f32_t a, v4_f32_t b) {
+  return (v4_f32_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z,
+    .w = a.w * b.w
+  };
+}
+
+static __inline__ v4_f32_t v4_f32_div(v4_f32_t a, v4_f32_t b) {
+  return (v4_f32_t){
+    .x = a.x / b.x,
+    .y = a.y / b.y,
+    .z = a.z / b.z,
+    .w = a.w / b.w
+  };
+}
+
+// Operation for v2 floating point 64 bits
+
+static __inline__ v2_f64_t v2_f64_add(v2_f64_t a, v2_f64_t b) {
+  return (v2_f64_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y
+  };
+}
+
+static __inline__ v2_f64_t v2_f64_sub(v2_f64_t a, v2_f64_t b) {
+  return (v2_f64_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y
+  };
+}
+
+static __inline__ v2_f64_t v2_f64_mul(v2_f64_t a, v2_f64_t b) {
+  return (v2_f64_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y
+  };
+}
+
+static __inline__ v2_f64_t v2_f64_div(v2_f64_t a, v2_f64_t b) {
+  return (v2_f64_t){
+    .x = a.x / b.x,
+    .y = a.y / b.y
+  };
+}
+
+// Operation for v3 floating point 64 bits
+
+static __inline__ v3_f64_t v3_f64_add(v3_f64_t a, v3_f64_t b) {
+  return (v3_f64_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z
+  };
+}
+
+static __inline__ v3_f64_t v3_f64_sub(v3_f64_t a, v3_f64_t b) {
+  return (v3_f64_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z
+  };
+}
+
+static __inline__ v3_f64_t v3_f64_mul(v3_f64_t a, v3_f64_t b) {
+  return (v3_f64_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z
+  };
+}
+
+static __inline__ v3_f64_t v3_f64_div(v3_f64_t a, v3_f64_t b) {
+  return (v3_f64_t){
+    .x = a.x / b.x,
+    .y = a.y / b.y,
+    .z = a.z / b.z
+  };
+}
+
+// Operation for v4 floating point 64 bits
+
+static __inline__ v4_f64_t v4_f64_add(v4_f64_t a, v4_f64_t b) {
+  return (v4_f64_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z,
+    .w = a.w + b.w
+  };
+}
+
+static __inline__ v4_f64_t v4_f64_sub(v4_f64_t a, v4_f64_t b) {
+  return (v4_f64_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w
+  };
+}
+
+static __inline__ v4_f64_t v4_f64_mul(v4_f64_t a, v4_f64_t b) {
+  return (v4_f64_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z,
+    .w = a.w * b.w
+  };
+}
+
+static __inline__ v4_f64_t v4_f64_div(v4_f64_t a, v4_f64_t b) {
+  return (v4_f64_t){
+    .x = a.x / b.x,
+    .y = a.y / b.y,
+    .z = a.z / b.z,
+    .w = a.w / b.w
+  };
+}
 
 #endif
