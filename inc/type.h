@@ -13,7 +13,7 @@ typedef unsigned short int  u16_t;
 typedef unsigned int        u32_t;
 typedef unsigned long int   u64_t;
 
-typedef __fp16  f16_t;
+// typedef __fp16  f16_t;
 typedef float   f32_t;
 typedef double  f64_t;
 
