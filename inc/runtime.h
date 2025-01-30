@@ -17,7 +17,7 @@ static __inline__ i32_t runtime_start(runtime_t* context) {
 
   if (gettimeofday(&record, NULL))
     return -1;
-  context->start = (record.tv_sec * 1000000) + record.tv_usec;
+  context->start = (u64_t)(record.tv_sec * 1000000) + (u64_t)record.tv_usec;
   return 0;
 }
 
@@ -26,7 +26,7 @@ static __inline__ i32_t runtime_stop(runtime_t* context) {
 
   if (gettimeofday(&record, NULL))
     return -1;
-  context->stop = (record.tv_sec * 1000000) + record.tv_usec;
+  context->stop = (u64_t)(record.tv_sec * 1000000) + (u64_t)record.tv_usec;
   context->delta = context->stop - context->start;
   return 0;
 }
