@@ -177,17 +177,29 @@ static __inline__ c64_t c64_div(c64_t z, c64_t w) {
 // Exponential - [type]_e(z)
 //------------------------------------------------------------------------------
 
-static __inline__ c32_t c32_e(c32_t z) {}
+static __inline__ c32_t c32_e(c32_t z) {
+  (void)z;
+  return (c32_t){0};
+}
 
-static __inline__ c64_t c64_e(c64_t z) {}
+static __inline__ c64_t c64_e(c64_t z) {
+  (void)z;
+  return (c64_t){0};
+}
 
 //------------------------------------------------------------------------------
 // Logarithm Natural - [type]_ln(z)
 //------------------------------------------------------------------------------
 
-static __inline__ c32_t c32_ln(c32_t z) {}
+static __inline__ c32_t c32_ln(c32_t z) {
+  (void)z;
+  return (c32_t){0};
+}
 
-static __inline__ c64_t c64_ln(c64_t z) {}
+static __inline__ c64_t c64_ln(c64_t z) {
+  (void)z;
+  return (c64_t){0};
+}
 
 //------------------------------------------------------------------------------
 // Multiplication - [type]_mul(z, w)
