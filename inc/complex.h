@@ -179,12 +179,18 @@ static __inline__ c64_t c64_div(c64_t z, c64_t w) {
 
 static __inline__ c32_t c32_e(c32_t z) {
   (void)z;
-  return (c32_t){0};
+  return (c32_t){
+    .re = 0,
+    .im = 0
+  };
 }
 
 static __inline__ c64_t c64_e(c64_t z) {
   (void)z;
-  return (c64_t){0};
+  return (c64_t){
+    .re = 0,
+    .im = 0
+  };
 }
 
 //------------------------------------------------------------------------------
@@ -193,12 +199,18 @@ static __inline__ c64_t c64_e(c64_t z) {
 
 static __inline__ c32_t c32_ln(c32_t z) {
   (void)z;
-  return (c32_t){0};
-}
+  return (c32_t){
+    .re = 0,
+    .im = 0
+  };
+} 
 
 static __inline__ c64_t c64_ln(c64_t z) {
   (void)z;
-  return (c64_t){0};
+  return (c64_t){
+    .re = 0,
+    .im = 0
+  };
 }
 
 //------------------------------------------------------------------------------
@@ -281,6 +293,10 @@ static __inline__ c64_t c64_sub(c64_t z, c64_t w) {
 // SIMD
 //------------------------------------------------------------------------------
 
+// Format - Array of Structures (AoS)
+// Format - Structure of Arrays (SoA)
+
+// For this Function
 //static __inline__ c32x2_t c32_to_c32x2(c32_t *z) {
 //  return (c32x2_t){
 //    .re = { z[0].re, z[1].re },
@@ -288,28 +304,102 @@ static __inline__ c64_t c64_sub(c64_t z, c64_t w) {
 //  };
 //}
 
-//static __inline__ void c32x2_add(c32x4_t* z, c32x4_t* w, c32x4_t* r) {
-//  const float32x2_t z_re = vld1_f32(z->re);
-//  const float32x2_t z_im = vld1_f32(z->im);
-//  const float32x2_t w_re = vld1_f32(w->re);
-//  const float32x2_t w_im = vld1_f32(w->im);
+#include <arm_neon.h>
 
-//  vst1_f32(r->re, vadd_f32(z_re, w_re));
-//  vst1_f32(r->im, vadd_f32(z_im, w_im));
-//}
+//------------------------------------------------------------------------------
+// SIMD - Addition - [type]_add(z, w)
+//------------------------------------------------------------------------------
 
-//static __inline__ void c32x4_add(c32x4_t* z, c32x4_t* w, c32x4_t* r) {
-//  float32x4_t z_re;
-//  float32x4_t z_im;
-//  float32x4_t w_re;
-//  float32x4_t w_im;
+static __inline__ void c32x2_add(c32x2_t* z, c32x2_t* w, c32x2_t* r) {
+  const float32x2_t z_re = vld1_f32(z->re);
+  const float32x2_t z_im = vld1_f32(z->im);
+  const float32x2_t w_re = vld1_f32(w->re);
+  const float32x2_t w_im = vld1_f32(w->im);
 
-//  z_re = vld1q_f32(z->re);
-//  z_im = vld1q_f32(z->im);
-//  w_re = vld1q_f32(w->re);
-//  w_im = vld1q_f32(w->im);
-//  vst1q_f32(r->re, vaddq_f32(z_re, w_re));
-//  vst1q_f32(r->im, vaddq_f32(z_im, w_im));
-//}
+  vst1_f32(r->re, vadd_f32(z_re, w_re));
+  vst1_f32(r->im, vadd_f32(z_im, w_im));
+}
+
+static __inline__ void c32x4_add(c32x4_t* z, c32x4_t* w, c32x4_t* r) {
+  const float32x4_t z_re = vld1q_f32(z->re);
+  const float32x4_t z_im = vld1q_f32(z->im);
+  const float32x4_t w_re = vld1q_f32(w->re);
+  const float32x4_t w_im = vld1q_f32(w->im);
+
+  vst1q_f32(r->re, vaddq_f32(z_re, w_re));
+  vst1q_f32(r->im, vaddq_f32(z_im, w_im));
+}
+
+static __inline__ void c32x8_add(c32x8_t* z, c32x8_t* w, c32x8_t* r) {
+  float32x4_t z_re;
+  float32x4_t z_im;
+  float32x4_t w_re;
+  float32x4_t w_im;
+
+  // First Half
+  z_re = vld1q_f32(z->re);
+  z_im = vld1q_f32(z->im);
+  w_re = vld1q_f32(w->re);
+  w_im = vld1q_f32(w->im);
+  vst1q_f32(r->re, vaddq_f32(z_re, w_re));
+  vst1q_f32(r->im, vaddq_f32(z_im, w_im));
+  // Second Half
+  z_re = vld1q_f32(&z->re[4]);
+  z_im = vld1q_f32(&z->im[4]);
+  w_re = vld1q_f32(&w->re[4]);
+  w_im = vld1q_f32(&w->im[4]);
+  vst1q_f32(&r->re[4], vaddq_f32(z_re, w_re));
+  vst1q_f32(&r->im[4], vaddq_f32(z_im, w_im));
+}
+
+// static __inline__ void c32x16_add(c32x16_t* z, c32x16_t* w, c32x16_t* r) {}
+
+//------------------------------------------------------------------------------
+// SIMD - Multiplication - [type]_mul(z, w)
+//------------------------------------------------------------------------------
+
+static __inline__ void c32x2_mul(c32x2_t* z, c32x2_t* w, c32x2_t* r) {
+  const float32x2_t z_re = vld1_f32(z->re);
+  const float32x2_t z_im = vld1_f32(z->im);
+  const float32x2_t w_re = vld1_f32(w->re);
+  const float32x2_t w_im = vld1_f32(w->im);
+
+  vst1_f32(r->re, vsub_f32(vmul_f32(z_re, w_re), vmul_f32(z_im, w_im)));
+  vst1_f32(r->im, vadd_f32(vmul_f32(z_re, w_im), vmul_f32(z_im, w_re)));
+}
+
+static __inline__ void c32x4_mul(c32x4_t* z, c32x4_t* w, c32x4_t* r) {
+  const float32x4_t z_re = vld1q_f32(z->re);
+  const float32x4_t z_im = vld1q_f32(z->im);
+  const float32x4_t w_re = vld1q_f32(w->re);
+  const float32x4_t w_im = vld1q_f32(w->im);
+
+  vst1q_f32(r->re, vsubq_f32(vmulq_f32(z_re, w_re), vmulq_f32(z_im, w_im)));
+  vst1q_f32(r->im, vaddq_f32(vmulq_f32(z_re, w_im), vmulq_f32(z_im, w_re)));
+}
+
+static __inline__ void c32x8_mul(c32x8_t* z, c32x8_t* w, c32x8_t* r) {
+  float32x4_t z_re;
+  float32x4_t z_im;
+  float32x4_t w_re;
+  float32x4_t w_im;
+
+  // First Half
+  z_re = vld1q_f32(z->re);
+  z_im = vld1q_f32(z->im);
+  w_re = vld1q_f32(w->re);
+  w_im = vld1q_f32(w->im);
+  vst1q_f32(r->re, vsubq_f32(vmulq_f32(z_re, w_re), vmulq_f32(z_im, w_im)));
+  vst1q_f32(r->im, vaddq_f32(vmulq_f32(z_re, w_im), vmulq_f32(z_im, w_re)));
+  // Second Half
+  z_re = vld1q_f32(&z->re[4]);
+  z_im = vld1q_f32(&z->im[4]);
+  w_re = vld1q_f32(&w->re[4]);
+  w_im = vld1q_f32(&w->im[4]);
+  vst1q_f32(&r->re[4], vsubq_f32(vmulq_f32(z_re, w_re), vmulq_f32(z_im, w_im)));
+  vst1q_f32(&r->im[4], vaddq_f32(vmulq_f32(z_re, w_im), vmulq_f32(z_im, w_re)));
+}
+
+// static __inline__ void c32x16_mul(c32x16_t* z, c32x16_t* w, c32x16_t* r) {}
 
 #endif
