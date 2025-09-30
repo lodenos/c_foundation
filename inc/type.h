@@ -1,6 +1,8 @@
 #ifndef TYPE_H
 #define TYPE_H
 
+#include <stdbool.h>
+
 // NOTE: This is just the basic type redefinition.
 
 typedef signed char i8_t;

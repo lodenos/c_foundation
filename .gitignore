@@ -1,0 +1,6 @@
+# Files
+.clangd
+libcfoundation.a
+
+# Folders
+./obj
