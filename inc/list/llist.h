@@ -15,21 +15,22 @@ struct llist_s {
 
 struct llist_init_s {
   void* item;
-  void* next;
 };
 
-// CONSTRUCTOR
+// constructor
 
-llist_t* llist_new(llist_t** context, llist_init_t* init);
+llist_t* llist_new(llist_t** context);
+llist_t* llist_new_init(llist_t** context, llist_init_t* init);
 
-// DESTRUCTOR
+// destructor
 
 void  llist_delete(void* context);
 
-// METHODES
+// methodes
 
 llist_t* llist_index(llist_t* context, u64_t index);
-llist_t* llist_push(llist_t* context, llist_t* node);
+llist_t* llist_push_head(llist_t* context, llist_t* node);
+llist_t* llist_push_tail(llist_t* context, llist_t* node);
 u64_t llist_size(llist_t* context);
 
 #endif

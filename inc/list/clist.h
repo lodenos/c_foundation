@@ -22,16 +22,20 @@ struct clist_node_s {
   void* next;
 };
 
-// CONSTRUCTOR
+// constructor
 
-clist_t* clist_new(clist_t** context, clist_init_t* init);
+clist_t* clist_new(clist_t** context);
+clist_t* clist_new_init(clist_t** context, clist_init_t* init);
 
-// DESTRUCTOR
+// destructor
 
 void clist_delete(void* context);
 
-// METHODES
+// methodes
 
 clist_node_t* clist_index(clist_t* context, u64_t index);
+clist_t* clist_push_head(clist_t* context, void* item, void (*fn_delete)(void*));
+clist_t* clist_push_tail(clist_t* context, void* item, void (*fn_delete)(void*));
+u64_t clist_size(clist_t* context);
 
 #endif

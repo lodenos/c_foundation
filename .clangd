@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - "-Wall"
+    - "-Werror"
+    - "-Wextra"
+    - "-std=gnu17"
+    - "-I/Users/endurance/Documents/42London/c_foundation/inc"
