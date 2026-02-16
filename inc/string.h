@@ -1,7 +1,7 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include "type.h"
+#include "type/type.h"
 
 #define STRING_GROWTH_FACTOR 2
 #define STRING_DEFAULT_SIZE 64
@@ -12,20 +12,20 @@ typedef struct string_init_s string_init_t;
 typedef struct string_cmp_s string_cmp_t;
 
 enum StringType {
-  STRING_EMPTY        = 0,      // string is empty \0
-  STRING_ALPHA        = 1 << 0, // (a-z, A-Z)
+  STRING_EMPTY = 0,             // string is empty \0
+  STRING_ALPHA = 1 << 0,        // (a-z, A-Z)
   STRING_ALPHANUMERIC = 1 << 1, // (a-z, A-Z, 0-9)
-  STRING_BLANK        = 1 << 2, //
-  STRING_CONTROL      = 1 << 3, //
-  STRING_DIGIT        = 1 << 4, // (0-9)
-  STRING_FLOAT        = 1 << 5, // x.xxx
-  STRING_GRAPHICAL    = 1 << 6, // Alphanumeric and Punctuation
-  STRING_HEXADECIMAL  = 1 << 7, // (0-Ff)
-  STRING_LETTER       = 1 << 8, // Lowercase and Uppercase
-  STRING_LOWERCASE    = 1 << 9, // 
-  STRING_PUNCTUATION  = 1 << 10, //
-  STRING_SPACE        = 1 << 11, //
-  STRING_UPPERCASE    = 1 << 12, // (A-Z)
+  STRING_BLANK = 1 << 2,        //
+  STRING_CONTROL = 1 << 3,      //
+  STRING_DIGIT = 1 << 4,        // (0-9)
+  STRING_FLOAT = 1 << 5,        // x.xxx
+  STRING_GRAPHICAL = 1 << 6,    // Alphanumeric and Punctuation
+  STRING_HEXADECIMAL = 1 << 7,  // (0-Ff)
+  STRING_LETTER = 1 << 8,       // Lowercase and Uppercase
+  STRING_LOWERCASE = 1 << 9,    //
+  STRING_PUNCTUATION = 1 << 10, //
+  STRING_SPACE = 1 << 11,       //
+  STRING_UPPERCASE = 1 << 12,   // (A-Z)
 };
 
 struct string_s {
@@ -96,7 +96,6 @@ u64_t string_to_u64(string_t* context);
 
 f32_t string_to_f32(string_t* context);
 f64_t string_to_f64(string_t* context);
-
 
 // string_trim
 // string_

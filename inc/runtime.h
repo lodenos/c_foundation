@@ -1,8 +1,9 @@
 #ifndef RUNTIME_H
 #define RUNTIME_H
 
+#include "type/type.h"
+#include <stddef.h>
 #include <sys/time.h>
-#include "type.h"
 
 typedef struct runtime_s runtime_t;
 
@@ -12,7 +13,7 @@ struct runtime_s {
   u64_t stop;
 };
 
-static __inline__ i32_t runtime_start(runtime_t* context) {
+static inline i32_t runtime_start(runtime_t* context) {
   struct timeval record;
 
   if (gettimeofday(&record, NULL))
@@ -21,7 +22,7 @@ static __inline__ i32_t runtime_start(runtime_t* context) {
   return 0;
 }
 
-static __inline__ i32_t runtime_stop(runtime_t* context) {
+static inline i32_t runtime_stop(runtime_t* context) {
   struct timeval record;
 
   if (gettimeofday(&record, NULL))
