@@ -54,6 +54,10 @@ struct i8v2_s {
       i8_t y;
     };
     struct {
+      i8_t row;
+      i8_t column;
+    };
+    struct {
       i8_t width;
       i8_t height;
     };
@@ -110,6 +114,24 @@ struct i8v4_s {
       i8_t depth;
       i8_t spissitude;
     };
+    struct {
+      i8_t north;
+      i8_t east;
+      i8_t south;
+      i8_t west;
+    };
+    struct {
+      i8_t top;
+      i8_t right;
+      i8_t bottom;
+      i8_t left;
+    };
+    struct {
+      i8_t top_left;
+      i8_t top_right;
+      i8_t bottom_right;
+      i8_t bottom_left;
+    };
   };
 };
 
@@ -122,6 +144,10 @@ struct i16v2_s {
     struct {
       i16_t x;
       i16_t y;
+    };
+    struct {
+      i16_t row;
+      i16_t column;
     };
     struct {
       i16_t width;
@@ -180,6 +206,24 @@ struct i16v4_s {
       i16_t depth;
       i16_t spissitude;
     };
+    struct {
+      i16_t north;
+      i16_t east;
+      i16_t south;
+      i16_t west;
+    };
+    struct {
+      i16_t top;
+      i16_t right;
+      i16_t bottom;
+      i16_t left;
+    };
+    struct {
+      i16_t top_left;
+      i16_t top_right;
+      i16_t bottom_right;
+      i16_t bottom_left;
+    };
   };
 };
 
@@ -192,6 +236,10 @@ struct i32v2_s {
     struct {
       i32_t x;
       i32_t y;
+    };
+    struct {
+      i32_t row;
+      i32_t column;
     };
     struct {
       i32_t width;
@@ -250,6 +298,24 @@ struct i32v4_s {
       i32_t depth;
       i32_t spissitude;
     };
+    struct {
+      i32_t north;
+      i32_t east;
+      i32_t south;
+      i32_t west;
+    };
+    struct {
+      i32_t top;
+      i32_t right;
+      i32_t bottom;
+      i32_t left;
+    };
+    struct {
+      i32_t top_left;
+      i32_t top_right;
+      i32_t bottom_right;
+      i32_t bottom_left;
+    };
   };
 };
 
@@ -262,6 +328,10 @@ struct i64v2_s {
     struct {
       i64_t x;
       i64_t y;
+    };
+    struct {
+      i64_t row;
+      i64_t column;
     };
     struct {
       i64_t width;
@@ -320,6 +390,24 @@ struct i64v4_s {
       i64_t depth;
       i64_t spissitude;
     };
+    struct {
+      i64_t north;
+      i64_t east;
+      i64_t south;
+      i64_t west;
+    };
+    struct {
+      i64_t top;
+      i64_t right;
+      i64_t bottom;
+      i64_t left;
+    };
+    struct {
+      i64_t top_left;
+      i64_t top_right;
+      i64_t bottom_right;
+      i64_t bottom_left;
+    };
   };
 };
 
@@ -332,6 +420,10 @@ struct u8v2_s {
     struct {
       u8_t x;
       u8_t y;
+    };
+    struct {
+      u8_t row;
+      u8_t column;
     };
     struct {
       u8_t width;
@@ -390,6 +482,24 @@ struct u8v4_s {
       u8_t depth;
       u8_t spissitude;
     };
+    struct {
+      u8_t north;
+      u8_t east;
+      u8_t south;
+      u8_t west;
+    };
+    struct {
+      u8_t top;
+      u8_t right;
+      u8_t bottom;
+      u8_t left;
+    };
+    struct {
+      u8_t top_left;
+      u8_t top_right;
+      u8_t bottom_right;
+      u8_t bottom_left;
+    };
   };
 };
 
@@ -402,6 +512,10 @@ struct u16v2_s {
     struct {
       u16_t x;
       u16_t y;
+    };
+    struct {
+      u16_t row;
+      u16_t column;
     };
     struct {
       u16_t width;
@@ -460,6 +574,24 @@ struct u16v4_s {
       u16_t depth;
       u16_t spissitude;
     };
+    struct {
+      u16_t north;
+      u16_t east;
+      u16_t south;
+      u16_t west;
+    };
+    struct {
+      u16_t top;
+      u16_t right;
+      u16_t bottom;
+      u16_t left;
+    };
+    struct {
+      u16_t top_left;
+      u16_t top_right;
+      u16_t bottom_right;
+      u16_t bottom_left;
+    };
   };
 };
 
@@ -472,6 +604,10 @@ struct u32v2_s {
     struct {
       u32_t x;
       u32_t y;
+    };
+    struct {
+      u32_t row;
+      u32_t column;
     };
     struct {
       u32_t width;
@@ -530,6 +666,24 @@ struct u32v4_s {
       u32_t depth;
       u32_t spissitude;
     };
+    struct {
+      u32_t north;
+      u32_t east;
+      u32_t south;
+      u32_t west;
+    };
+    struct {
+      u32_t top;
+      u32_t right;
+      u32_t bottom;
+      u32_t left;
+    };
+    struct {
+      u32_t top_left;
+      u32_t top_right;
+      u32_t bottom_right;
+      u32_t bottom_left;
+    };
   };
 };
 
@@ -542,6 +696,10 @@ struct u64v2_s {
     struct {
       u64_t x;
       u64_t y;
+    };
+    struct {
+      u64_t row;
+      u64_t column;
     };
     struct {
       u64_t width;
@@ -600,6 +758,24 @@ struct u64v4_s {
       u64_t depth;
       u64_t spissitude;
     };
+    struct {
+      u64_t north;
+      u64_t east;
+      u64_t south;
+      u64_t west;
+    };
+    struct {
+      u64_t top;
+      u64_t right;
+      u64_t bottom;
+      u64_t left;
+    };
+    struct {
+      u64_t top_left;
+      u64_t top_right;
+      u64_t bottom_right;
+      u64_t bottom_left;
+    };
   };
 };
 
@@ -612,6 +788,10 @@ struct f32v2_s {
     struct {
       f32_t x;
       f32_t y;
+    };
+    struct {
+      f32_t row;
+      f32_t column;
     };
     struct {
       f32_t width;
@@ -670,6 +850,24 @@ struct f32v4_s {
       f32_t depth;
       f32_t spissitude;
     };
+    struct {
+      f32_t north;
+      f32_t east;
+      f32_t south;
+      f32_t west;
+    };
+    struct {
+      f32_t top;
+      f32_t right;
+      f32_t bottom;
+      f32_t left;
+    };
+    struct {
+      f32_t top_left;
+      f32_t top_right;
+      f32_t bottom_right;
+      f32_t bottom_left;
+    };
   };
 };
 
@@ -682,6 +880,10 @@ struct f64v2_s {
     struct {
       f64_t x;
       f64_t y;
+    };
+    struct {
+      f64_t row;
+      f64_t column;
     };
     struct {
       f64_t width;
@@ -739,6 +941,24 @@ struct f64v4_s {
       f64_t height;
       f64_t depth;
       f64_t spissitude;
+    };
+    struct {
+      f64_t north;
+      f64_t east;
+      f64_t south;
+      f64_t west;
+    };
+    struct {
+      f64_t top;
+      f64_t right;
+      f64_t bottom;
+      f64_t left;
+    };
+    struct {
+      f64_t top_left;
+      f64_t top_right;
+      f64_t bottom_right;
+      f64_t bottom_left;
     };
   };
 };

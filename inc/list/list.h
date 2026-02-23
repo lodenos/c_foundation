@@ -1,42 +1,45 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "arena_allocator.h"
+// C-Standard
 #include <stdbool.h>
 #include <stdlib.h>
+// C-Foundation
+// #include "arena_allocator.h"
+#include <type/type.h>
+#include <type/vector.h>
 
 typedef struct list_s list_t;
 typedef struct list_init_s list_init_t;
 
 struct list_s {
   void* item;
-  void* next;
+  list_t* next;
 };
 
 struct list_init_s {
   void* item;
 };
 
-//-----
+// typedef struct list_aa_s list_aa_t;
 
-typedef struct list_aa_s list_aa_t;
+// struct list_aa_s {
+//   arena_allocator_t *arena;
+//   list_t *pool;
+// };
 
-struct list_aa_s {
-  arena_allocator_t* arena;
-  list_t* pool;
-};
+// Allocator
 
-// INFO: Allocator
+/*
+static list_aa_t g_list_aa = {0}; // Singleton
 
-static list_aa_t g_list_aa = {0}; // INFO: Singleton
+static inline list_t *list_aa_link(void *memory, u64_t num);
 
-static inline list_t* list_aa_link(void* memory, u64_t num);
-
-static inline list_t* list_aa(u64_t num) {
+static inline list_t *list_aa(u64_t num) {
   u64_t index;
   u64_t num_nodes;
-  list_t* head;
-  list_t* node;
+  list_t *head;
+  list_t *node;
 
   printf("> list aa\n");
 
@@ -55,19 +58,19 @@ static inline list_t* list_aa(u64_t num) {
   node = head;
   while (index < num) {
     if (!node->next) {
-      // TODO: Fetch more memory arena
+      // Fetch more memory arena
     }
     node = node->next;
     ++index;
   }
-  g_list_aa.pool = (list_t*)node->next;
+  g_list_aa.pool = (list_t *)node->next;
   node->next = NULL;
   return head;
 }
 
-static inline list_t* list_aa_link(void* memory, u64_t num) {
+static inline list_t *list_aa_link(void *memory, u64_t num) {
   u64_t index = 0;
-  list_t* list = (list_t*)memory;
+  list_t *list = (list_t *)memory;
 
   printf("> list aa link\n");
 
@@ -79,32 +82,34 @@ static inline list_t* list_aa_link(void* memory, u64_t num) {
   return list;
 }
 
-static inline list_t* list_aa_relink(void* memory, u64_t num) {
-  // TODO: relink node by address order
+static inline list_t *list_aa_relink(void *memory, u64_t num) {
+  // relink node by address order
   (void)memory;
   (void)num;
   return NULL;
-}
+}*/
 
 // INFO: Constructor
 
 static inline list_t* list_new(list_t** ctx) {
-  *ctx = list_aa(1);
+  *ctx = (list_t*)malloc(sizeof(list_t));
+  if (!*ctx)
+    return NULL;
+  **ctx = (list_t){0};
   return *ctx;
 }
 
 static inline list_t* list_new_init(list_t** ctx, list_init_t* init) {
-  *ctx = list_aa(1);
+  *ctx = (list_t*)malloc(sizeof(list_t));
   if (!*ctx)
     return NULL;
   (*ctx)->item = init->item;
   return *ctx;
 }
 
-static inline list_t* list_new_build(list_t** ctx, u64_t num) {
-  *ctx = list_aa(num);
-  return *ctx;
-}
+// static inline list_t* list_new_build(list_t** ctx, u64_t num) {
+//   return *ctx;
+// }
 
 // list_t* list_new_aa(list_t** ctx, list_aa_t* aa) {}
 // list_t* list_new_init_aa(list_t** ctx, list_init_t*init) {}
@@ -240,31 +245,34 @@ static inline list_t* list_clone(list_t* ctx, void* (*fn)(void*)) {
   return NULL;
 }
 
-static inline list_t*
-list_clone_aa(list_t* ctx, list_aa_t* aa, void* (*fn)(void*)) {
-  (void)ctx;
-  (void)aa;
-  (void)fn;
-  return NULL;
-}
+// static inline list_t*
+// list_clone_aa(list_t* ctx, list_aa_t* aa, void* (*fn)(void*)) {
+//   (void)ctx;
+//   (void)aa;
+//   (void)fn;
+//   return NULL;
+// }
 
 static inline list_t* list_copy(list_t* ctx) {
-  list_t* head;
-  list_t* node = ctx;
-  u64_t size = 0;
+  (void)ctx;
+  /*  list_t* head;
+    list_t* node = ctx;
+    u64_t size = 0;
 
-  while (node) {
-    ++size;
-    node = (list_t*)node->next;
-  }
-  head = list_aa(size);
-  node = head;
-  while (ctx) {
-    node->item = ctx->item;
-    node = (list_t*)node->next;
-    ctx = (list_t*)ctx->next;
-  }
-  return head;
+    while (node) {
+      ++size;
+      node = (list_t*)node->next;
+    }
+    head = list_aa(size);
+    node = head;
+    while (ctx) {
+      node->item = ctx->item;
+      node = (list_t*)node->next;
+      ctx = (list_t*)ctx->next;
+    }
+    return head;
+    */
+  return NULL;
 }
 
 static inline list_t* list_join(list_t* a, list_t* b) {
@@ -364,15 +372,22 @@ static inline list_t* list_push_at(list_t** ctx, list_t* node, u64_t index) {
 }
 
 static inline list_t* list_push_head(list_t** ctx, list_t* node) {
-  (void)ctx;
-  (void)node;
-  return NULL;
+  node->next = *ctx;
+  *ctx = node;
+  return *ctx;
 }
 
 static inline list_t* list_push_tail(list_t** ctx, list_t* node) {
-  (void)ctx;
-  (void)node;
-  return NULL;
+  list_t* knot = *ctx;
+
+  if (!knot) {
+    *ctx = node;
+    return node;
+  }
+  while (knot->next)
+    knot = knot->next;
+  knot->next = node;
+  return *ctx;
 }
 
 // INFO: function -> query
@@ -403,8 +418,10 @@ static inline list_t* list_find_all_fn(list_t* ctx, void* value) {
 static inline u64_t list_size(list_t* ctx) {
   u64_t count = 0;
 
-  while (ctx->next)
-    ctx = (list_t*)ctx->next;
+  while (ctx) {
+    ctx = ctx->next;
+    ++count;
+  }
   return count;
 }
 
