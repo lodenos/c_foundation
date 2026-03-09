@@ -1,11 +1,11 @@
 #ifndef CLIST_H
 #define CLIST_H
 
-#include "type.h"
+#include "type/type.h"
 
 // INFO: clist mean Class-like Linked List
 
-typedef struct clist_s      clist_t;
+typedef struct clist_s clist_t;
 typedef struct clist_init_t clist_init_t;
 typedef struct clist_node_s clist_node_t;
 
@@ -34,8 +34,10 @@ void clist_delete(void* context);
 // methodes
 
 clist_node_t* clist_index(clist_t* context, u64_t index);
-clist_t* clist_push_head(clist_t* context, void* item, void (*fn_delete)(void*));
-clist_t* clist_push_tail(clist_t* context, void* item, void (*fn_delete)(void*));
+clist_t*
+clist_push_head(clist_t* context, void* item, void (*fn_delete)(void*));
+clist_t*
+clist_push_tail(clist_t* context, void* item, void (*fn_delete)(void*));
 u64_t clist_size(clist_t* context);
 
 #endif

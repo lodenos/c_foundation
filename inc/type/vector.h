@@ -54,8 +54,16 @@ struct i8v2_s {
       i8_t y;
     };
     struct {
+      i8_t horizontal;
+      i8_t vertical;
+    };
+    struct {
       i8_t row;
       i8_t column;
+    };
+    struct {
+      i8_t start;
+      i8_t stop;
     };
     struct {
       i8_t width;
@@ -146,8 +154,16 @@ struct i16v2_s {
       i16_t y;
     };
     struct {
+      i16_t horizontal;
+      i16_t vertical;
+    };
+    struct {
       i16_t row;
       i16_t column;
+    };
+    struct {
+      i16_t start;
+      i16_t stop;
     };
     struct {
       i16_t width;
@@ -238,8 +254,16 @@ struct i32v2_s {
       i32_t y;
     };
     struct {
+      i32_t horizontal;
+      i32_t vertical;
+    };
+    struct {
       i32_t row;
       i32_t column;
+    };
+    struct {
+      i32_t start;
+      i32_t stop;
     };
     struct {
       i32_t width;
@@ -330,8 +354,16 @@ struct i64v2_s {
       i64_t y;
     };
     struct {
+      i64_t horizontal;
+      i64_t vertical;
+    };
+    struct {
       i64_t row;
       i64_t column;
+    };
+    struct {
+      i64_t start;
+      i64_t stop;
     };
     struct {
       i64_t width;
@@ -422,8 +454,16 @@ struct u8v2_s {
       u8_t y;
     };
     struct {
+      u8_t horizontal;
+      u8_t vertical;
+    };
+    struct {
       u8_t row;
       u8_t column;
+    };
+    struct {
+      u8_t start;
+      u8_t stop;
     };
     struct {
       u8_t width;
@@ -514,8 +554,16 @@ struct u16v2_s {
       u16_t y;
     };
     struct {
+      u16_t horizontal;
+      u16_t vertical;
+    };
+    struct {
       u16_t row;
       u16_t column;
+    };
+    struct {
+      u16_t start;
+      u16_t stop;
     };
     struct {
       u16_t width;
@@ -606,8 +654,16 @@ struct u32v2_s {
       u32_t y;
     };
     struct {
+      u32_t horizontal;
+      u32_t vertical;
+    };
+    struct {
       u32_t row;
       u32_t column;
+    };
+    struct {
+      u32_t start;
+      u32_t stop;
     };
     struct {
       u32_t width;
@@ -698,8 +754,16 @@ struct u64v2_s {
       u64_t y;
     };
     struct {
+      u64_t horizontal;
+      u64_t vertical;
+    };
+    struct {
       u64_t row;
       u64_t column;
+    };
+    struct {
+      u64_t start;
+      u64_t stop;
     };
     struct {
       u64_t width;
@@ -790,8 +854,16 @@ struct f32v2_s {
       f32_t y;
     };
     struct {
+      f32_t horizontal;
+      f32_t vertical;
+    };
+    struct {
       f32_t row;
       f32_t column;
+    };
+    struct {
+      f32_t start;
+      f32_t stop;
     };
     struct {
       f32_t width;
@@ -882,8 +954,16 @@ struct f64v2_s {
       f64_t y;
     };
     struct {
+      f64_t horizontal;
+      f64_t vertical;
+    };
+    struct {
       f64_t row;
       f64_t column;
+    };
+    struct {
+      f64_t start;
+      f64_t stop;
     };
     struct {
       f64_t width;
