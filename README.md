@@ -6,6 +6,22 @@ A new modern way to think a C Foundation Library should be.
 > IA-assisted, zero tolerance for bullshit code. Single dictator here.
 > Bugs, better algorithms, ideas? PRs welcome.
 
+type
+```
+u8_t  -> uint8_t  -> unsigned char  ->  8-bit
+u16_t -> uint16_t -> unsigned short -> 16-bit
+u32_t -> uint32_t -> unsigned int   -> 32-bit
+u64_t -> uint64_t -> unsigned char  -> 64-bit
+
+i8_t  -> int8_t  -> signed char  ->  8-bit
+i16_t -> int16_t -> signed short -> 16-bit
+i32_t -> int32_t -> signed int   -> 32-bit
+i64_t -> int64_t -> signed char  -> 64-bit
+
+f32_t -> float  -> 32-bit
+f64_t -> double -> 64-bit
+```
+
 list example
 ```c
 #include <stdio.h>
