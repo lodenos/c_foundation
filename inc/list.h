@@ -2,9 +2,7 @@
 #define LIST_H
 
 #include <stdlib.h>
-#include <stdint.h>
-
-typedef uint64_t u64_t;
+#include "type.h"
 
 typedef struct list_s list_t;
 typedef struct list_init_s list_init_t;
