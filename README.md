@@ -7,7 +7,7 @@ A new modern way to think a C Foundation Library should be.
 > Bugs, better algorithms, ideas? PRs welcome.
 
 type
-```c
+```
 u8_t  -> uint8_t  -> unsigned char  ->  8-bit
 u16_t -> uint16_t -> unsigned short -> 16-bit
 u32_t -> uint32_t -> unsigned int   -> 32-bit
