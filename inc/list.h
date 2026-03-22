@@ -42,9 +42,10 @@ static inline list_t* list_new_init(list_t** ctx, list_init_t* init) {
 // destructor
 
 static inline void list_delete(void* ctx) {
-  list_t* node = (list_t*)ctx;
+  list_t* node;
   list_t* prev;
 
+  node = (list_t*)ctx;
   while (node) {
     prev = node;
     node = node->next;
@@ -55,10 +56,20 @@ static inline void list_delete(void* ctx) {
 // function -> insertion
 
 static inline list_t* list_push_at(list_t** ctx, list_t* node, u64_t index) {
-  (void)ctx;
-  (void)node;
-  (void)index;
-  return NULL;
+  list_t** current;
+  u64_t count;
+
+  current = ctx;
+  count = 0;
+  while (*current && count < index) {
+    current = &(*current)->next;
+    ++count;
+  }
+  if (count < index)
+    return NULL;
+  node->next = *current;
+  *current = node;
+  return node;
 }
 
 static inline list_t* list_push_head(list_t** ctx, list_t* node) {
@@ -68,16 +79,12 @@ static inline list_t* list_push_head(list_t** ctx, list_t* node) {
 }
 
 static inline list_t* list_push_tail(list_t** ctx, list_t* node) {
-  list_t* head;
+  list_t** current;
 
-  if (!*ctx) {
-    *ctx = node;
-    return node;
-  }
-  head = *ctx;
-  while (head->next)
-    head = head->next;
-  head->next = node;
+  current = ctx;
+  while (*current)
+    current = &(*current)->next;
+  *current = node;
   return *ctx;
 }
 
@@ -88,16 +95,9 @@ static inline list_t* list_push_tail(list_t** ctx, list_t* node) {
 // function -> query
 
 static inline list_t* list_index(list_t* ctx, u64_t index) {
-  u64_t count;
-
-  count = 0;
-  while(ctx) {
-    if (count == index)
-      return ctx;
+  while (ctx && index--)
     ctx = ctx->next;
-    ++count;
-  }
-  return NULL;
+  return ctx;
 }
 
 static inline u64_t list_size(list_t* ctx) {
@@ -124,22 +124,46 @@ static inline list_t* list_clear(list_t* ctx, void (*fn)(void*)) {
 }
 
 static inline list_t* list_pop_at(list_t** ctx, u64_t index) {
-  (void)ctx;
-  (void)index;
-  return NULL;
+  list_t* current;
+  list_t* node;
+  u64_t count;
+
+  if (index == 0) {
+    node = *ctx;
+    *ctx = node->next;
+    return node;
+  }
+  current = *ctx;
+  count = 1;
+  while (current->next && count < index) {
+    current = current->next;
+    ++count;
+  }
+  if (!current->next)
+    return NULL;
+  node = current->next;
+  current->next = node->next;
+  return node;
 }
 
 static inline list_t* list_pop_head(list_t** ctx) {
   list_t* node;
 
   node = *ctx;
-  *ctx = (*ctx)->next;
+  *ctx = node->next;
   return node;
 }
 
 static inline list_t* list_pop_tail(list_t** ctx) {
-  (void)ctx;
-  return NULL;
+  list_t** current;
+  list_t* node;
+
+  current = ctx;
+  while ((*current)->next)
+    current = &(*current)->next;
+  node = *current;
+  *current = NULL;
+  return node;
 }
 
 #endif
