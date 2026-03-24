@@ -45,6 +45,8 @@ typedef struct f64_v4_s f64_v4_t;
 
 struct i8_v2_s {
   union {
+    i8_t e[2];
+    i8_t element[2];
     struct {
       i8_t a, b;
     };
@@ -68,6 +70,8 @@ struct i8_v2_s {
 
 struct i8_v3_s {
   union {
+    i8_t e[3];
+    i8_t element[3];
     struct {
       i8_t a, b, c;
     };
@@ -82,6 +86,8 @@ struct i8_v3_s {
 
 struct i8_v4_s {
   union {
+    i8_t e[4];
+    i8_t element[4];
     struct {
       i8_t a, b, c, d;
     };
@@ -111,6 +117,8 @@ struct i8_v4_s {
 
 struct u8_v2_s {
   union {
+    u8_t e[2];
+    u8_t element[2];
     struct {
       u8_t a, b;
     };
@@ -134,6 +142,8 @@ struct u8_v2_s {
 
 struct u8_v3_s {
   union {
+    u8_t e[3];
+    u8_t element[3];
     struct {
       u8_t a, b, c;
     };
@@ -148,6 +158,8 @@ struct u8_v3_s {
 
 struct u8_v4_s {
   union {
+    u8_t e[4];
+    u8_t element[4];
     struct {
       u8_t a, b, c, d;
     };
@@ -177,6 +189,8 @@ struct u8_v4_s {
 
 struct i16_v2_s {
   union {
+    i16_t e[2];
+    i16_t element[2];
     struct {
       i16_t a, b;
     };
@@ -200,6 +214,8 @@ struct i16_v2_s {
 
 struct i16_v3_s {
   union {
+    i16_t e[3];
+    i16_t element[3];
     struct {
       i16_t a, b, c;
     };
@@ -214,6 +230,8 @@ struct i16_v3_s {
 
 struct i16_v4_s {
   union {
+    i16_t e[4];
+    i16_t element[4];
     struct {
       i16_t a, b, c, d;
     };
@@ -243,6 +261,8 @@ struct i16_v4_s {
 
 struct u16_v2_s {
   union {
+    u16_t e[2];
+    u16_t element[2];
     struct {
       u16_t a, b;
     };
@@ -266,6 +286,8 @@ struct u16_v2_s {
 
 struct u16_v3_s {
   union {
+    u16_t e[3];
+    u16_t element[3];
     struct {
       u16_t a, b, c;
     };
@@ -280,6 +302,8 @@ struct u16_v3_s {
 
 struct u16_v4_s {
   union {
+    u16_t e[4];
+    u16_t element[4];
     struct {
       u16_t a, b, c, d;
     };
@@ -310,6 +334,8 @@ struct u16_v4_s {
 
 struct i32_v2_s {
   union {
+    i32_t e[2];
+    i32_t element[2];
     struct {
       i32_t a, b;
     };
@@ -333,6 +359,8 @@ struct i32_v2_s {
 
 struct i32_v3_s {
   union {
+    i32_t e[3];
+    i32_t element[3];
     struct {
       i32_t a, b, c;
     };
@@ -347,6 +375,8 @@ struct i32_v3_s {
 
 struct i32_v4_s {
   union {
+    i32_t e[4];
+    i32_t element[4];
     struct {
       i32_t a, b, c, d;
     };
@@ -376,6 +406,8 @@ struct i32_v4_s {
 
 struct u32_v2_s {
   union {
+    u32_t e[2];
+    u32_t element[2];
     struct {
       u32_t a, b;
     };
@@ -399,6 +431,8 @@ struct u32_v2_s {
 
 struct u32_v3_s {
   union {
+    u32_t e[3];
+    u32_t element[3];
     struct {
       u32_t a, b, c;
     };
@@ -413,6 +447,8 @@ struct u32_v3_s {
 
 struct u32_v4_s {
   union {
+    u32_t e[4];
+    u32_t element[4];
     struct {
       u32_t a, b, c, d;
     };
@@ -442,6 +478,8 @@ struct u32_v4_s {
 
 struct i64_v2_s {
   union {
+    i64_t e[2];
+    i64_t element[2];
     struct {
       i64_t a, b;
     };
@@ -465,6 +503,8 @@ struct i64_v2_s {
 
 struct i64_v3_s {
   union {
+    i64_t e[3];
+    i64_t element[3];
     struct {
       i64_t a, b, c;
     };
@@ -479,6 +519,8 @@ struct i64_v3_s {
 
 struct i64_v4_s {
   union {
+    i64_t e[4];
+    i64_t element[4];
     struct {
       i64_t a, b, c, d;
     };
@@ -508,6 +550,8 @@ struct i64_v4_s {
 
 struct u64_v2_s {
   union {
+    u64_t e[2];
+    u64_t element[2];
     struct {
       u64_t a, b;
     };
@@ -531,6 +575,8 @@ struct u64_v2_s {
 
 struct u64_v3_s {
   union {
+    u64_t e[3];
+    u64_t element[3];
     struct {
       u64_t a, b, c;
     };
@@ -545,6 +591,8 @@ struct u64_v3_s {
 
 struct u64_v4_s {
   union {
+    u64_t e[4];
+    u64_t element[4];
     struct {
       u64_t a, b, c, d;
     };
@@ -574,6 +622,8 @@ struct u64_v4_s {
 
 struct f32_v2_s {
   union {
+    f32_t e[2];
+    f32_t element[2];
     struct {
       f32_t a, b;
     };
@@ -597,6 +647,8 @@ struct f32_v2_s {
 
 struct f32_v3_s {
   union {
+    f32_t e[3];
+    f32_t element[3];
     struct {
       f32_t a, b, c;
     };
@@ -611,6 +663,8 @@ struct f32_v3_s {
 
 struct f32_v4_s {
   union {
+    f32_t e[4];
+    f32_t element[4];
     struct {
       f32_t a, b, c, d;
     };
@@ -640,6 +694,8 @@ struct f32_v4_s {
 
 struct f64_v2_s {
   union {
+    f64_t e[2];
+    f64_t element[2];
     struct {
       f64_t a, b;
     };
@@ -663,6 +719,8 @@ struct f64_v2_s {
 
 struct f64_v3_s {
   union {
+    f64_t e[3];
+    f64_t element[3];
     struct {
       f64_t a, b, c;
     };
@@ -677,6 +735,8 @@ struct f64_v3_s {
 
 struct f64_v4_s {
   union {
+    f64_t e[4];
+    f64_t element[4];
     struct {
       f64_t a, b, c, d;
     };
