@@ -45,6 +45,8 @@ typedef struct f64_v4_s f64_v4_t;
 
 struct i8_v2_s {
   union {
+    i8_t e[2];
+    i8_t element[2];
     struct {
       i8_t a, b;
     };
@@ -68,6 +70,8 @@ struct i8_v2_s {
 
 struct i8_v3_s {
   union {
+    i8_t e[3];
+    i8_t element[3];
     struct {
       i8_t a, b, c;
     };
@@ -82,6 +86,8 @@ struct i8_v3_s {
 
 struct i8_v4_s {
   union {
+    i8_t e[4];
+    i8_t element[4];
     struct {
       i8_t a, b, c, d;
     };
@@ -111,6 +117,8 @@ struct i8_v4_s {
 
 struct u8_v2_s {
   union {
+    u8_t e[2];
+    u8_t element[2];
     struct {
       u8_t a, b;
     };
@@ -134,6 +142,8 @@ struct u8_v2_s {
 
 struct u8_v3_s {
   union {
+    u8_t e[3];
+    u8_t element[3];
     struct {
       u8_t a, b, c;
     };
@@ -148,6 +158,8 @@ struct u8_v3_s {
 
 struct u8_v4_s {
   union {
+    u8_t e[4];
+    u8_t element[4];
     struct {
       u8_t a, b, c, d;
     };
@@ -177,6 +189,8 @@ struct u8_v4_s {
 
 struct i16_v2_s {
   union {
+    i16_t e[2];
+    i16_t element[2];
     struct {
       i16_t a, b;
     };
@@ -200,6 +214,8 @@ struct i16_v2_s {
 
 struct i16_v3_s {
   union {
+    i16_t e[3];
+    i16_t element[3];
     struct {
       i16_t a, b, c;
     };
@@ -214,6 +230,8 @@ struct i16_v3_s {
 
 struct i16_v4_s {
   union {
+    i16_t e[4];
+    i16_t element[4];
     struct {
       i16_t a, b, c, d;
     };
@@ -243,6 +261,8 @@ struct i16_v4_s {
 
 struct u16_v2_s {
   union {
+    u16_t e[2];
+    u16_t element[2];
     struct {
       u16_t a, b;
     };
@@ -266,6 +286,8 @@ struct u16_v2_s {
 
 struct u16_v3_s {
   union {
+    u16_t e[3];
+    u16_t element[3];
     struct {
       u16_t a, b, c;
     };
@@ -280,6 +302,8 @@ struct u16_v3_s {
 
 struct u16_v4_s {
   union {
+    u16_t e[4];
+    u16_t element[4];
     struct {
       u16_t a, b, c, d;
     };
@@ -310,6 +334,8 @@ struct u16_v4_s {
 
 struct i32_v2_s {
   union {
+    i32_t e[2];
+    i32_t element[2];
     struct {
       i32_t a, b;
     };
@@ -333,6 +359,8 @@ struct i32_v2_s {
 
 struct i32_v3_s {
   union {
+    i32_t e[3];
+    i32_t element[3];
     struct {
       i32_t a, b, c;
     };
@@ -347,6 +375,8 @@ struct i32_v3_s {
 
 struct i32_v4_s {
   union {
+    i32_t e[4];
+    i32_t element[4];
     struct {
       i32_t a, b, c, d;
     };
@@ -376,6 +406,8 @@ struct i32_v4_s {
 
 struct u32_v2_s {
   union {
+    u32_t e[2];
+    u32_t element[2];
     struct {
       u32_t a, b;
     };
@@ -399,6 +431,8 @@ struct u32_v2_s {
 
 struct u32_v3_s {
   union {
+    u32_t e[3];
+    u32_t element[3];
     struct {
       u32_t a, b, c;
     };
@@ -413,6 +447,8 @@ struct u32_v3_s {
 
 struct u32_v4_s {
   union {
+    u32_t e[4];
+    u32_t element[4];
     struct {
       u32_t a, b, c, d;
     };
@@ -442,6 +478,8 @@ struct u32_v4_s {
 
 struct i64_v2_s {
   union {
+    i64_t e[2];
+    i64_t element[2];
     struct {
       i64_t a, b;
     };
@@ -465,6 +503,8 @@ struct i64_v2_s {
 
 struct i64_v3_s {
   union {
+    i64_t e[3];
+    i64_t element[3];
     struct {
       i64_t a, b, c;
     };
@@ -479,6 +519,8 @@ struct i64_v3_s {
 
 struct i64_v4_s {
   union {
+    i64_t e[4];
+    i64_t element[4];
     struct {
       i64_t a, b, c, d;
     };
@@ -508,6 +550,8 @@ struct i64_v4_s {
 
 struct u64_v2_s {
   union {
+    u64_t e[2];
+    u64_t element[2];
     struct {
       u64_t a, b;
     };
@@ -531,6 +575,8 @@ struct u64_v2_s {
 
 struct u64_v3_s {
   union {
+    u64_t e[3];
+    u64_t element[3];
     struct {
       u64_t a, b, c;
     };
@@ -545,6 +591,8 @@ struct u64_v3_s {
 
 struct u64_v4_s {
   union {
+    u64_t e[4];
+    u64_t element[4];
     struct {
       u64_t a, b, c, d;
     };
@@ -574,6 +622,8 @@ struct u64_v4_s {
 
 struct f32_v2_s {
   union {
+    f32_t e[2];
+    f32_t element[2];
     struct {
       f32_t a, b;
     };
@@ -597,6 +647,8 @@ struct f32_v2_s {
 
 struct f32_v3_s {
   union {
+    f32_t e[3];
+    f32_t element[3];
     struct {
       f32_t a, b, c;
     };
@@ -611,6 +663,8 @@ struct f32_v3_s {
 
 struct f32_v4_s {
   union {
+    f32_t e[4];
+    f32_t element[4];
     struct {
       f32_t a, b, c, d;
     };
@@ -640,6 +694,8 @@ struct f32_v4_s {
 
 struct f64_v2_s {
   union {
+    f64_t e[2];
+    f64_t element[2];
     struct {
       f64_t a, b;
     };
@@ -663,6 +719,8 @@ struct f64_v2_s {
 
 struct f64_v3_s {
   union {
+    f64_t e[3];
+    f64_t element[3];
     struct {
       f64_t a, b, c;
     };
@@ -677,6 +735,8 @@ struct f64_v3_s {
 
 struct f64_v4_s {
   union {
+    f64_t e[4];
+    f64_t element[4];
     struct {
       f64_t a, b, c, d;
     };
@@ -703,5 +763,681 @@ struct f64_v4_s {
     };
   };
 };
+
+static inline f32_v2_t f32_v2_add(f32_v2_t a, f32_v2_t b) {
+  return (f32_v2_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+  };  
+}
+
+static inline f32_v2_t f32_v2_add_s(f32_v2_t a, f32_t s) {
+  return (f32_v2_t){
+    .x = a.x + s,
+    .y = a.y + s,
+  };
+}
+
+static inline f32_t f32_v2_dist(f32_v2_t a, f32_v2_t b) {
+  const f32_v2_t v = (f32_v2_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+  };
+
+  return __builtin_sqrtf(v.x * v.x + v.y * v.y);
+}
+
+static inline f32_t f32_v2_dist_2(f32_v2_t a, f32_v2_t b) {
+  const f32_v2_t v = (f32_v2_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+  };
+
+  return v.x * v.x + v.y * v.y;
+}
+
+static inline f32_t f32_v2_mag(f32_v2_t v) {
+  return __builtin_sqrtf(v.x * v.x + v.y * v.y);
+}
+
+static inline f32_t f32_v2_mag_2(f32_v2_t v) {
+  return v.x * v.x + v.y * v.y;
+}
+
+static inline f32_v2_t f32_v2_max(f32_v2_t a, f32_v2_t b) {
+  return (f32_v2_t){
+    .x = (a.x > b.x) ? a.x : b.x,
+    .y = (a.y > b.y) ? a.y : b.y,
+  };
+}
+
+static inline f32_v2_t f32_v2_min(f32_v2_t a, f32_v2_t b) {
+  return (f32_v2_t){
+    .x = (a.x < b.x) ? a.x : b.x,
+    .y = (a.y < b.y) ? a.y : b.y,
+  };
+}
+
+static inline f32_v2_t f32_v2_mul(f32_v2_t a, f32_v2_t b) {
+  return (f32_v2_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+  };
+}
+
+static inline f32_v2_t f32_v2_mul_s(f32_v2_t a, f32_t s) {
+  return (f32_v2_t){
+    .x = a.x * s,
+    .y = a.y * s,
+  };
+}
+
+static inline f32_v2_t f32_v2_neg(f32_v2_t v) {
+  return (f32_v2_t){
+    .x = -v.x,
+    .y = -v.y,
+  };
+}
+
+static inline f32_v2_t f32_v2_norm(f32_v2_t v) {
+  const f32_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y);
+
+  return (f32_v2_t){
+    .x = v.x / mag,
+    .y = v.y / mag,
+  };
+}
+
+static inline f32_v2_t f32_v2_sub(f32_v2_t a, f32_v2_t b) {
+  return (f32_v2_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+  };
+}
+
+static inline f32_v2_t f32_v2_sub_s(f32_v2_t a, f32_t s) {
+  return (f32_v2_t){
+    .x = a.x - s,
+    .y = a.y - s,
+  };
+}
+
+static inline f64_v2_t f64_v2_add(f64_v2_t a, f64_v2_t b) {
+  return (f64_v2_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+  };  
+}
+
+static inline f64_v2_t f64_v2_add_s(f64_v2_t a, f64_t s) {
+  return (f64_v2_t){
+    .x = a.x + s,
+    .y = a.y + s,
+  };
+}
+
+static inline f64_t f64_v2_dist(f64_v2_t a, f64_v2_t b) {
+  const f64_v2_t v = (f64_v2_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+  };
+
+  return __builtin_sqrt(v.x * v.x + v.y * v.y);
+}
+
+static inline f64_t f64_v2_dist_2(f64_v2_t a, f64_v2_t b) {
+  const f64_v2_t v = (f64_v2_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+  };
+
+  return v.x * v.x + v.y * v.y;
+}
+
+static inline f64_t f64_v2_mag(f64_v2_t v) {
+  return __builtin_sqrt(v.x * v.x + v.y * v.y);
+}
+
+static inline f64_t f64_v2_mag_2(f64_v2_t v) {
+  return v.x * v.x + v.y * v.y;
+}
+
+static inline f64_v2_t f64_v2_max(f64_v2_t a, f64_v2_t b) {
+  return (f64_v2_t){
+    .x = (a.x > b.x) ? a.x : b.x,
+    .y = (a.y > b.y) ? a.y : b.y,
+  };
+}
+
+static inline f64_v2_t f64_v2_min(f64_v2_t a, f64_v2_t b) {
+  return (f64_v2_t){
+    .x = (a.x < b.x) ? a.x : b.x,
+    .y = (a.y < b.y) ? a.y : b.y,
+  };
+}
+
+static inline f64_v2_t f64_v2_mul(f64_v2_t a, f64_v2_t b) {
+  return (f64_v2_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+  };
+}
+
+static inline f64_v2_t f64_v2_mul_s(f64_v2_t a, f64_t s) {
+  return (f64_v2_t){
+    .x = a.x * s,
+    .y = a.y * s,
+  };
+}
+
+static inline f64_v2_t f64_v2_neg(f64_v2_t v) {
+  return (f64_v2_t){
+    .x = -v.x,
+    .y = -v.y,
+  };
+}
+
+static inline f64_v2_t f64_v2_norm(f64_v2_t v) {
+  const f64_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y);
+
+  return (f64_v2_t){
+    .x = v.x / mag,
+    .y = v.y / mag,
+  };
+}
+
+static inline f64_v2_t f64_v2_sub(f64_v2_t a, f64_v2_t b) {
+  return (f64_v2_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+  };
+}
+
+static inline f64_v2_t f64_v2_sub_s(f64_v2_t a, f64_t s) {
+  return (f64_v2_t){
+    .x = a.x - s,
+    .y = a.y - s,
+  };
+}
+
+static inline f32_v3_t f32_v3_add(f32_v3_t a, f32_v3_t b) {
+  return (f32_v3_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z,
+  };  
+}
+
+static inline f32_v3_t f32_v3_add_s(f32_v3_t a, f32_t s) {
+  return (f32_v3_t){
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
+  };
+}
+
+static inline f32_v3_t f32_v3_cross(f32_v3_t a, f32_v3_t b) {
+  return (f32_v3_t) {
+    .x = a.y * b.z - a.z * b.y,
+    .y = a.z * b.x - a.x * b.z,
+    .z = a.x * b.y - a.y * b.x,
+  };
+}
+
+static inline f32_t f32_v3_dist(f32_v3_t a, f32_v3_t b) {
+  const f32_v3_t v = (f32_v3_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+  };
+
+  return __builtin_sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+}
+
+static inline f32_t f32_v3_dist_2(f32_v3_t a, f32_v3_t b) {
+  const f32_v3_t v = (f32_v3_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+  };
+
+  return v.x * v.x + v.y * v.y + v.z * v.z;
+}
+
+static inline f32_t f32_v3_mag(f32_v3_t v) {
+  return __builtin_sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+}
+
+static inline f32_t f32_v3_mag_2(f32_v3_t v) {
+  return v.x * v.x + v.y * v.y + v.z * v.z;
+}
+
+static inline f32_v3_t f32_v3_max(f32_v3_t a, f32_v3_t b) {
+  return (f32_v3_t){
+    .x = (a.x > b.x) ? a.x : b.x,
+    .y = (a.y > b.y) ? a.y : b.y,
+    .z = (a.z > b.z) ? a.z : b.z,
+  };
+}
+
+static inline f32_v3_t f32_v3_min(f32_v3_t a, f32_v3_t b) {
+  return (f32_v3_t){
+    .x = (a.x < b.x) ? a.x : b.x,
+    .y = (a.y < b.y) ? a.y : b.y,
+    .z = (a.z < b.z) ? a.z : b.z,
+  };
+}
+
+static inline f32_v3_t f32_v3_mul(f32_v3_t a, f32_v3_t b) {
+  return (f32_v3_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z,
+  };
+}
+
+static inline f32_v3_t f32_v3_mul_s(f32_v3_t a, f32_t s) {
+  return (f32_v3_t){
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
+  };
+}
+
+static inline f32_v3_t f32_v3_neg(f32_v3_t v) {
+  return (f32_v3_t){
+    .x = -v.x,
+    .y = -v.y,
+    .z = -v.z,
+  };
+}
+
+static inline f32_v3_t f32_v3_norm(f32_v3_t v) {
+  const f32_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+
+  return (f32_v3_t){
+    .x = v.x / mag,
+    .y = v.y / mag,
+    .z = v.z / mag,
+  };
+}
+
+static inline f32_v3_t f32_v3_sub(f32_v3_t a, f32_v3_t b) {
+  return (f32_v3_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+  };
+}
+
+static inline f32_v3_t f32_v3_sub_s(f32_v3_t a, f32_t s) {
+  return (f32_v3_t){
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
+  };
+}
+
+static inline f64_v3_t f64_v3_add(f64_v3_t a, f64_v3_t b) {
+  return (f64_v3_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z,
+  };  
+}
+
+static inline f64_v3_t f64_v3_add_s(f64_v3_t a, f64_t s) {
+  return (f64_v3_t){
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
+  };
+}
+
+static inline f64_v3_t f64_v3_cross(f64_v3_t a, f64_v3_t b) {
+  return (f64_v3_t) {
+    .x = a.y * b.z - a.z * b.y,
+    .y = a.z * b.x - a.x * b.z,
+    .z = a.x * b.y - a.y * b.x,
+  };
+}
+
+static inline f64_t f64_v3_dist(f64_v3_t a, f64_v3_t b) {
+  const f64_v3_t v = (f64_v3_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+  };
+
+  return __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+}
+
+static inline f64_t f64_v3_dist_2(f64_v3_t a, f64_v3_t b) {
+  const f64_v3_t v = (f64_v3_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+  };
+
+  return v.x * v.x + v.y * v.y + v.z * v.z;
+}
+
+static inline f64_t f64_v3_mag(f64_v3_t v) {
+  return __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+}
+
+static inline f64_t f64_v3_mag_2(f64_v3_t v) {
+  return v.x * v.x + v.y * v.y + v.z * v.z;
+}
+
+static inline f64_v3_t f64_v3_max(f64_v3_t a, f64_v3_t b) {
+  return (f64_v3_t){
+    .x = (a.x > b.x) ? a.x : b.x,
+    .y = (a.y > b.y) ? a.y : b.y,
+    .z = (a.z > b.z) ? a.z : b.z,
+  };
+}
+
+static inline f64_v3_t f64_v3_min(f64_v3_t a, f64_v3_t b) {
+  return (f64_v3_t){
+    .x = (a.x < b.x) ? a.x : b.x,
+    .y = (a.y < b.y) ? a.y : b.y,
+    .z = (a.z < b.z) ? a.z : b.z,
+  };
+}
+
+static inline f64_v3_t f64_v3_mul(f64_v3_t a, f64_v3_t b) {
+  return (f64_v3_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z,
+  };
+}
+
+static inline f64_v3_t f64_v3_mul_s(f64_v3_t a, f64_t s) {
+  return (f64_v3_t){
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
+  };
+}
+
+static inline f64_v3_t f64_v3_neg(f64_v3_t v) {
+  return (f64_v3_t){
+    .x = -v.x,
+    .y = -v.y,
+    .z = -v.z,
+  };
+}
+
+static inline f64_v3_t f64_v3_norm(f64_v3_t v) {
+  const f64_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+
+  return (f64_v3_t){
+    .x = v.x / mag,
+    .y = v.y / mag,
+    .z = v.z / mag,
+  };
+}
+
+static inline f64_v3_t f64_v3_sub(f64_v3_t a, f64_v3_t b) {
+  return (f64_v3_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+  };
+}
+
+static inline f64_v3_t f64_v3_sub_s(f64_v3_t a, f64_t s) {
+  return (f64_v3_t){
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
+  };
+}
+
+static inline f32_v4_t f32_v4_add(f32_v4_t a, f32_v4_t b) {
+  return (f32_v4_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z,
+    .w = a.w + b.w,
+  };  
+}
+
+static inline f32_v4_t f32_v4_add_s(f32_v4_t a, f32_t s) {
+  return (f32_v4_t){
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
+    .w = a.w + s,
+  };
+}
+
+static inline f32_t f32_v4_dist(f32_v4_t a, f32_v4_t b) {
+  const f32_v4_t v = (f32_v4_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w,
+  };
+
+  return __builtin_sqrtf(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+}
+
+static inline f32_t f32_v4_dist_2(f32_v4_t a, f32_v4_t b) {
+  const f32_v4_t v = (f32_v4_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w,
+  };
+
+  return v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w;
+}
+
+static inline f32_t f32_v4_mag(f32_v4_t v) {
+  return __builtin_sqrtf(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+}
+
+static inline f32_t f32_v4_mag_2(f32_v4_t v) {
+  return v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w;
+}
+
+static inline f32_v4_t f32_v4_max(f32_v4_t a, f32_v4_t b) {
+  return (f32_v4_t){
+    .x = (a.x > b.x) ? a.x : b.x,
+    .y = (a.y > b.y) ? a.y : b.y,
+    .z = (a.z > b.z) ? a.z : b.z,
+    .w = (a.w > b.w) ? a.w : b.w
+  };
+}
+
+static inline f32_v4_t f32_v4_min(f32_v4_t a, f32_v4_t b) {
+  return (f32_v4_t){
+    .x = (a.x < b.x) ? a.x : b.x,
+    .y = (a.y < b.y) ? a.y : b.y,
+    .z = (a.z < b.z) ? a.z : b.z,
+    .w = (a.w < b.w) ? a.w : b.w
+  };
+}
+
+static inline f32_v4_t f32_v4_mul(f32_v4_t a, f32_v4_t b) {
+  return (f32_v4_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z,
+    .w = a.w * b.w,
+  };
+}
+
+static inline f32_v4_t f32_v4_mul_s(f32_v4_t a, f32_t s) {
+  return (f32_v4_t){
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
+    .w = a.w * s,
+  };
+}
+
+static inline f32_v4_t f32_v4_neg(f32_v4_t v) {
+  return (f32_v4_t){
+    .x = -v.x,
+    .y = -v.y,
+    .z = -v.z,
+    .w = -v.w,
+  };
+}
+
+static inline f32_v4_t f32_v4_norm(f32_v4_t v) {
+  const f32_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+
+  return (f32_v4_t){
+    .x = v.x / mag,
+    .y = v.y / mag,
+    .z = v.z / mag,
+    .w = v.w / mag,
+  };
+}
+
+static inline f32_v4_t f32_v4_sub(f32_v4_t a, f32_v4_t b) {
+  return (f32_v4_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w,
+  };
+}
+
+static inline f32_v4_t f32_v4_sub_s(f32_v4_t a, f32_t s) {
+  return (f32_v4_t){
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
+    .w = a.w - s,
+  };
+}
+
+static inline f64_v4_t f64_v4_add(f64_v4_t a, f64_v4_t b) {
+  return (f64_v4_t){
+    .x = a.x + b.x,
+    .y = a.y + b.y,
+    .z = a.z + b.z,
+    .w = a.w + b.w,
+  };  
+}
+
+static inline f64_v4_t f64_v4_add_s(f64_v4_t a, f64_t s) {
+  return (f64_v4_t){
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
+    .w = a.w + s,
+  };
+}
+
+static inline f64_t f64_v4_dist(f64_v4_t a, f64_v4_t b) {
+  const f64_v4_t v = (f64_v4_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w,
+  };
+
+  return __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+}
+
+static inline f64_t f64_v4_dist_2(f64_v4_t a, f64_v4_t b) {
+  const f64_v4_t v = (f64_v4_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w,
+  };
+
+  return v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w;
+}
+
+static inline f64_t f64_v4_mag(f64_v4_t v) {
+  return __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+}
+
+static inline f64_t f64_v4_mag_2(f64_v4_t v) {
+  return v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w;
+}
+
+static inline f64_v4_t f64_v4_max(f64_v4_t a, f64_v4_t b) {
+  return (f64_v4_t){
+    .x = (a.x > b.x) ? a.x : b.x,
+    .y = (a.y > b.y) ? a.y : b.y,
+    .z = (a.z > b.z) ? a.z : b.z,
+    .w = (a.w > b.w) ? a.w : b.w
+  };
+}
+
+static inline f64_v4_t f64_v4_min(f64_v4_t a, f64_v4_t b) {
+  return (f64_v4_t){
+    .x = (a.x < b.x) ? a.x : b.x,
+    .y = (a.y < b.y) ? a.y : b.y,
+    .z = (a.z < b.z) ? a.z : b.z,
+    .w = (a.w < b.w) ? a.w : b.w
+  };
+}
+
+static inline f64_v4_t f64_v4_mul(f64_v4_t a, f64_v4_t b) {
+  return (f64_v4_t){
+    .x = a.x * b.x,
+    .y = a.y * b.y,
+    .z = a.z * b.z,
+    .w = a.w * b.w,
+  };
+}
+
+static inline f64_v4_t f64_v4_mul_s(f64_v4_t a, f64_t s) {
+  return (f64_v4_t){
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
+    .w = a.w * s,
+  };
+}
+
+static inline f64_v4_t f64_v4_neg(f64_v4_t v) {
+  return (f64_v4_t){
+    .x = -v.x,
+    .y = -v.y,
+    .z = -v.z,
+    .w = -v.w,
+  };
+}
+
+static inline f64_v4_t f64_v4_norm(f64_v4_t v) {
+  const f64_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+
+  return (f64_v4_t){
+    .x = v.x / mag,
+    .y = v.y / mag,
+    .z = v.z / mag,
+    .w = v.w / mag,
+  };
+}
+
+static inline f64_v4_t f64_v4_sub(f64_v4_t a, f64_v4_t b) {
+  return (f64_v4_t){
+    .x = a.x - b.x,
+    .y = a.y - b.y,
+    .z = a.z - b.z,
+    .w = a.w - b.w,
+  };
+}
+
+static inline f64_v4_t f64_v4_sub_s(f64_v4_t a, f64_t s) {
+  return (f64_v4_t){
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
+    .w = a.w - s,
+  };
+}
 
 #endif
