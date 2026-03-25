@@ -771,10 +771,10 @@ static inline f32_v2_t f32_v2_add(f32_v2_t a, f32_v2_t b) {
   };  
 }
 
-static inline f32_v2_t f32_v2_add_n(f32_v2_t a, f32_t n) {
+static inline f32_v2_t f32_v2_add_s(f32_v2_t a, f32_t s) {
   return (f32_v2_t){
-    .x = a.x + n,
-    .y = a.y + n,
+    .x = a.x + s,
+    .y = a.y + s,
   };
 }
 
@@ -825,10 +825,10 @@ static inline f32_v2_t f32_v2_mul(f32_v2_t a, f32_v2_t b) {
   };
 }
 
-static inline f32_v2_t f32_v3_mul_n(f32_v2_t a, f32_t n) {
+static inline f32_v2_t f32_v2_mul_s(f32_v2_t a, f32_t s) {
   return (f32_v2_t){
-    .x = a.x * n,
-    .y = a.y * n,
+    .x = a.x * s,
+    .y = a.y * s,
   };
 }
 
@@ -855,10 +855,10 @@ static inline f32_v2_t f32_v2_sub(f32_v2_t a, f32_v2_t b) {
   };
 }
 
-static inline f32_v2_t f32_v3_sub_n(f32_v2_t a, f32_t n) {
+static inline f32_v2_t f32_v2_sub_s(f32_v2_t a, f32_t s) {
   return (f32_v2_t){
-    .x = a.x - n,
-    .y = a.y - n,
+    .x = a.x - s,
+    .y = a.y - s,
   };
 }
 
@@ -869,10 +869,10 @@ static inline f64_v2_t f64_v2_add(f64_v2_t a, f64_v2_t b) {
   };  
 }
 
-static inline f64_v2_t f64_v2_add_n(f64_v2_t a, f64_t n) {
+static inline f64_v2_t f64_v2_add_s(f64_v2_t a, f64_t s) {
   return (f64_v2_t){
-    .x = a.x + n,
-    .y = a.y + n,
+    .x = a.x + s,
+    .y = a.y + s,
   };
 }
 
@@ -923,14 +923,14 @@ static inline f64_v2_t f64_v2_mul(f64_v2_t a, f64_v2_t b) {
   };
 }
 
-static inline f64_v2_t f64_v2_mul_n(f64_v2_t a, f64_t n) {
+static inline f64_v2_t f64_v2_mul_s(f64_v2_t a, f64_t s) {
   return (f64_v2_t){
-    .x = a.x * n,
-    .y = a.y * n,
+    .x = a.x * s,
+    .y = a.y * s,
   };
 }
 
-static inline f64_v2_t f64_v43_neg(f64_v2_t v) {
+static inline f64_v2_t f64_v2_neg(f64_v2_t v) {
   return (f64_v2_t){
     .x = -v.x,
     .y = -v.y,
@@ -953,10 +953,10 @@ static inline f64_v2_t f64_v2_sub(f64_v2_t a, f64_v2_t b) {
   };
 }
 
-static inline f64_v2_t f64_v2_sub_n(f64_v2_t a, f64_t n) {
+static inline f64_v2_t f64_v2_sub_s(f64_v2_t a, f64_t s) {
   return (f64_v2_t){
-    .x = a.x - n,
-    .y = a.y - n,
+    .x = a.x - s,
+    .y = a.y - s,
   };
 }
 
@@ -968,11 +968,11 @@ static inline f32_v3_t f32_v3_add(f32_v3_t a, f32_v3_t b) {
   };  
 }
 
-static inline f32_v3_t f32_v3_add_n(f32_v3_t a, f32_t n) {
+static inline f32_v3_t f32_v3_add_s(f32_v3_t a, f32_t s) {
   return (f32_v3_t){
-    .x = a.x + n,
-    .y = a.y + n,
-    .z = a.z + n,
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
   };
 }
 
@@ -1036,11 +1036,11 @@ static inline f32_v3_t f32_v3_mul(f32_v3_t a, f32_v3_t b) {
   };
 }
 
-static inline f32_v3_t f32_v3_mul_n(f32_v3_t a, f32_t n) {
+static inline f32_v3_t f32_v3_mul_s(f32_v3_t a, f32_t s) {
   return (f32_v3_t){
-    .x = a.x * n,
-    .y = a.y * n,
-    .z = a.z * n,
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
   };
 }
 
@@ -1070,11 +1070,11 @@ static inline f32_v3_t f32_v3_sub(f32_v3_t a, f32_v3_t b) {
   };
 }
 
-static inline f32_v3_t f32_v3_sub_n(f32_v3_t a, f32_t n) {
+static inline f32_v3_t f32_v3_sub_s(f32_v3_t a, f32_t s) {
   return (f32_v3_t){
-    .x = a.x - n,
-    .y = a.y - n,
-    .z = a.z - n,
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
   };
 }
 
@@ -1086,11 +1086,11 @@ static inline f64_v3_t f64_v3_add(f64_v3_t a, f64_v3_t b) {
   };  
 }
 
-static inline f64_v3_t f64_v3_add_n(f64_v3_t a, f64_t n) {
+static inline f64_v3_t f64_v3_add_s(f64_v3_t a, f64_t s) {
   return (f64_v3_t){
-    .x = a.x + n,
-    .y = a.y + n,
-    .z = a.z + n,
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
   };
 }
 
@@ -1154,15 +1154,15 @@ static inline f64_v3_t f64_v3_mul(f64_v3_t a, f64_v3_t b) {
   };
 }
 
-static inline f64_v3_t f64_v3_mul_n(f64_v3_t a, f64_t n) {
+static inline f64_v3_t f64_v3_mul_s(f64_v3_t a, f64_t s) {
   return (f64_v3_t){
-    .x = a.x * n,
-    .y = a.y * n,
-    .z = a.z * n,
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
   };
 }
 
-static inline f64_v3_t f64_v43_neg(f64_v3_t v) {
+static inline f64_v3_t f64_v3_neg(f64_v3_t v) {
   return (f64_v3_t){
     .x = -v.x,
     .y = -v.y,
@@ -1188,11 +1188,11 @@ static inline f64_v3_t f64_v3_sub(f64_v3_t a, f64_v3_t b) {
   };
 }
 
-static inline f64_v3_t f64_v3_sub_n(f64_v3_t a, f64_t n) {
+static inline f64_v3_t f64_v3_sub_s(f64_v3_t a, f64_t s) {
   return (f64_v3_t){
-    .x = a.x - n,
-    .y = a.y - n,
-    .z = a.z - n,
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
   };
 }
 
@@ -1205,12 +1205,12 @@ static inline f32_v4_t f32_v4_add(f32_v4_t a, f32_v4_t b) {
   };  
 }
 
-static inline f32_v4_t f32_v4_add_n(f32_v4_t a, f32_t n) {
+static inline f32_v4_t f32_v4_add_s(f32_v4_t a, f32_t s) {
   return (f32_v4_t){
-    .x = a.x + n,
-    .y = a.y + n,
-    .z = a.z + n,
-    .w = a.w + n,
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
+    .w = a.w + s,
   };
 }
 
@@ -1271,12 +1271,12 @@ static inline f32_v4_t f32_v4_mul(f32_v4_t a, f32_v4_t b) {
   };
 }
 
-static inline f32_v4_t f32_v4_mul_n(f32_v4_t a, f32_t n) {
+static inline f32_v4_t f32_v4_mul_s(f32_v4_t a, f32_t s) {
   return (f32_v4_t){
-    .x = a.x * n,
-    .y = a.y * n,
-    .z = a.z * n,
-    .w = a.w * n,
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
+    .w = a.w * s,
   };
 }
 
@@ -1309,12 +1309,12 @@ static inline f32_v4_t f32_v4_sub(f32_v4_t a, f32_v4_t b) {
   };
 }
 
-static inline f32_v4_t f32_v4_sub_n(f32_v4_t a, f32_t n) {
+static inline f32_v4_t f32_v4_sub_s(f32_v4_t a, f32_t s) {
   return (f32_v4_t){
-    .x = a.x - n,
-    .y = a.y - n,
-    .z = a.z - n,
-    .w = a.w - n,
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
+    .w = a.w - s,
   };
 }
 
@@ -1327,12 +1327,12 @@ static inline f64_v4_t f64_v4_add(f64_v4_t a, f64_v4_t b) {
   };  
 }
 
-static inline f64_v4_t f64_v4_add_n(f64_v4_t a, f64_t n) {
+static inline f64_v4_t f64_v4_add_s(f64_v4_t a, f64_t s) {
   return (f64_v4_t){
-    .x = a.x + n,
-    .y = a.y + n,
-    .z = a.z + n,
-    .w = a.w + n,
+    .x = a.x + s,
+    .y = a.y + s,
+    .z = a.z + s,
+    .w = a.w + s,
   };
 }
 
@@ -1393,12 +1393,12 @@ static inline f64_v4_t f64_v4_mul(f64_v4_t a, f64_v4_t b) {
   };
 }
 
-static inline f64_v4_t f64_v4_mul_n(f64_v4_t a, f64_t n) {
+static inline f64_v4_t f64_v4_mul_s(f64_v4_t a, f64_t s) {
   return (f64_v4_t){
-    .x = a.x * n,
-    .y = a.y * n,
-    .z = a.z * n,
-    .w = a.w * n,
+    .x = a.x * s,
+    .y = a.y * s,
+    .z = a.z * s,
+    .w = a.w * s,
   };
 }
 
@@ -1431,12 +1431,12 @@ static inline f64_v4_t f64_v4_sub(f64_v4_t a, f64_v4_t b) {
   };
 }
 
-static inline f64_v4_t f64_v4_sub_n(f64_v4_t a, f64_t n) {
+static inline f64_v4_t f64_v4_sub_s(f64_v4_t a, f64_t s) {
   return (f64_v4_t){
-    .x = a.x - n,
-    .y = a.y - n,
-    .z = a.z - n,
-    .w = a.w - n,
+    .x = a.x - s,
+    .y = a.y - s,
+    .z = a.z - s,
+    .w = a.w - s,
   };
 }
 
