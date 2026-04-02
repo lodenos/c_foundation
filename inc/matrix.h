@@ -157,6 +157,106 @@ static inline void f64_matrix_add(matrix_t* restrict a, matrix_t* restrict b, ma
     m_c[index] = m_a[index] + m_b[index];
 }
 
+static inline void i8_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  i8_t* restrict m_a = (i8_t*)a->ptr;
+  i8_t* restrict m_b = (i8_t*)b->ptr;
+  i8_t* restrict m_c = (i8_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void u8_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  u8_t* restrict m_a = (u8_t*)a->ptr;
+  u8_t* restrict m_b = (u8_t*)b->ptr;
+  u8_t* restrict m_c = (u8_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void i16_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  i16_t* restrict m_a = (i16_t*)a->ptr;
+  i16_t* restrict m_b = (i16_t*)b->ptr;
+  i16_t* restrict m_c = (i16_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void u16_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  u16_t* restrict m_a = (u16_t*)a->ptr;
+  u16_t* restrict m_b = (u16_t*)b->ptr;
+  u16_t* restrict m_c = (u16_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void i32_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  i32_t* restrict m_a = (i32_t*)a->ptr;
+  i32_t* restrict m_b = (i32_t*)b->ptr;
+  i32_t* restrict m_c = (i32_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void u32_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  u32_t* restrict m_a = (u32_t*)a->ptr;
+  u32_t* restrict m_b = (u32_t*)b->ptr;
+  u32_t* restrict m_c = (u32_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void i64_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  i64_t* restrict m_a = (i64_t*)a->ptr;
+  i64_t* restrict m_b = (i64_t*)b->ptr;
+  i64_t* restrict m_c = (i64_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void u64_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  u64_t* restrict m_a = (u64_t*)a->ptr;
+  u64_t* restrict m_b = (u64_t*)b->ptr;
+  u64_t* restrict m_c = (u64_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void f32_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  f32_t* restrict m_a = (f32_t*)a->ptr;
+  f32_t* restrict m_b = (f32_t*)b->ptr;
+  f32_t* restrict m_c = (f32_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
+static inline void f64_matrix_div(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
+  f64_t* restrict m_a = (f64_t*)a->ptr;
+  f64_t* restrict m_b = (f64_t*)b->ptr;
+  f64_t* restrict m_c = (f64_t*)c->ptr;
+  const u32_t elements = a->shape.row * a->shape.column;
+
+  for (u32_t index = 0; index < elements; ++index)
+    m_c[index] = m_a[index] / m_b[index];
+}
+
 static inline void i8_matrix_mul(matrix_t* restrict a, matrix_t* restrict b, matrix_t* restrict c) {
   i8_t* restrict m_a = (i8_t*)a->ptr;
   i8_t* restrict m_b = (i8_t*)b->ptr;
