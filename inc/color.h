@@ -154,7 +154,7 @@ static inline hsl8_t rgb8_to_hsl8(rgb8_t color) {
   f32_t saturation;
   const f32_t lightness = (max + min) * 0.5f;
 
-  if (delta > 0.f) {
+  if (delta > 0.0f) {
     saturation = (lightness < 0.5f)
       ? delta / (max + min)
       : delta / (2.0f - max - min);
@@ -188,7 +188,7 @@ static inline hsla8_t rgba8_to_hsla8(rgba8_t color) {
   f32_t saturation;
   const f32_t lightness = (max + min) * 0.5f;
 
-  if (delta > 0.f) {
+  if (delta > 0.0f) {
     saturation = (lightness < 0.5f)
       ? delta / (max + min)
       : delta / (2.0f - max - min);
@@ -223,7 +223,7 @@ static inline hsl16_t rgb16_to_hsl16(rgb16_t color) {
   f32_t saturation;
   const f32_t lightness = (max + min) * 0.5f;
 
-  if (delta > 0.f) {
+  if (delta > 0.0f) {
     saturation = (lightness < 0.5f)
       ? delta / (max + min)
       : delta / (2.0f - max - min);
@@ -257,7 +257,7 @@ static inline hsla16_t rgba16_to_hsla16(rgba16_t color) {
   f32_t saturation;
   const f32_t lightness = (max + min) * 0.5f;
 
-  if (delta > 0.f) {
+  if (delta > 0.0f) {
     saturation = (lightness < 0.5f)
       ? delta / (max + min)
       : delta / (2.0f - max - min);
@@ -381,7 +381,7 @@ static inline rgb16_t hsl16_to_rgb16(hsl16_t color) {
   const f32_t h = (360.0f * color.h) / 65535.0f;
   const f32_t s = color.s / 65535.0f;
   const f32_t l = color.l / 65535.0f;
-  const f32_t c = (1.0f - __builtin_fabs(2.0f * l - 1.0f)) * s;
+  const f32_t c = (1.0f - __builtin_fabsf(2.0f * l - 1.0f)) * s;
   const f32_t x = c * (1.0f - __builtin_fabsf(__builtin_fmodf(h / 60.0f, 2.0f) - 1.0f));
   const f32_t m = l - c / 2.0f;
 
