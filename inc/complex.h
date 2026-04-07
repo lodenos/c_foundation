@@ -2,9 +2,13 @@
 #define COMPLEX_H
 
 #include "type.h"
+#include "vector.h"
 
 typedef struct c32_s c32_t;
 typedef struct c64_s c64_t;
+
+typedef struct c32_v2_s c32_v2_t;
+typedef struct c64_v2_s c64_v2_t;
 
 struct c32_s {
   f32_t re;
@@ -14,6 +18,32 @@ struct c32_s {
 struct c64_s {
   f64_t re;
   f64_t im;
+};
+
+struct c32_v2_s {
+  union {
+    struct {
+      c32_t a;
+      c32_t b;
+    };
+    struct {
+      c32_t start;
+      c32_t stop;
+    };
+  };
+};
+
+struct c64_v2_s {
+  union {
+    struct {
+      c64_t a;
+      c64_t b;
+    };
+    struct {
+      c64_t start;
+      c64_t stop;
+    };
+  };
 };
 
 static inline f32_t c32_abs(c32_t z) {
@@ -116,6 +146,46 @@ static inline c64_t c64_e(c64_t z) {
     .re = r * __builtin_cos(z.im),
     .im = r * __builtin_sin(z.im),
   };
+}
+
+static inline c32_t* c32_grid_fill(c32_t* ctx, u32_v2_t frame, c32_v2_t bound) {
+  c32_t* head = ctx;
+  const c32_t step = (c32_t){
+    .re = (bound.b.re - bound.a.re) / (f32_t)(frame.width - 1),
+    .im = (bound.b.im - bound.a.im) / (f32_t)(frame.height - 1),
+  };
+  c32_t z;
+
+  z.im = bound.a.im;
+  for (u32_t y = 0; y < frame.height; ++y) {
+    z.re = bound.a.re;
+    for (u32_t x = 0; x < frame.width; ++x) {
+      *head++ = z;
+      z.re += step.re;
+    }
+    z.im += step.im;
+  }
+  return ctx;
+}
+
+static inline c64_t* c64_grid_fill(c64_t* ctx, u32_v2_t frame, c64_v2_t bound) {
+  c64_t* head = ctx;
+  const c64_t step = (c64_t){
+    .re = (bound.b.re - bound.a.re) / (f64_t)(frame.width - 1),
+    .im = (bound.b.im - bound.a.im) / (f64_t)(frame.height - 1),
+  };
+  c64_t z;
+
+  z.im = bound.a.im;
+  for (u32_t y = 0; y < frame.height; ++y) {
+    z.re = bound.a.re;
+    for (u32_t x = 0; x < frame.width; ++x) {
+      *head++ = z;
+      z.re += step.re;
+    }
+    z.im += step.im;
+  }
+  return ctx;
 }
 
 static inline c32_t c32_ln(c32_t z) {
