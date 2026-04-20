@@ -76,16 +76,16 @@ static inline c64_t c64_add(c64_t z, c64_t w) {
   };
 }
 
-static inline c32_t c32_add_n(c32_t z, f32_t n) {
+static inline c32_t c32_add_s(c32_t z, f32_t s) {
   return (c32_t){
-    .re = z.re + n,
+    .re = z.re + s,
     .im = z.im,
   };
 }
 
-static inline c64_t c64_add_n(c64_t z, f64_t n) {
+static inline c64_t c64_add_s(c64_t z, f64_t s) {
   return (c64_t){
-    .re = z.re + n,
+    .re = z.re + s,
     .im = z.im,
   };
 }
@@ -116,17 +116,17 @@ static inline c64_t c64_div(c64_t z, c64_t w) {
   };
 }
 
-static inline c32_t c32_div_n(c32_t z, f32_t n) {
+static inline c32_t c32_div_s(c32_t z, f32_t s) {
   return (c32_t){
-    .re = z.re / n,
-    .im = z.im / n,
+    .re = z.re / s,
+    .im = z.im / s,
   };
 }
 
-static inline c64_t c64_div_n(c64_t z, f64_t n) {
+static inline c64_t c64_div_s(c64_t z, f64_t s) {
   return (c64_t){
-    .re = z.re / n,
-    .im = z.im / n,
+    .re = z.re / s,
+    .im = z.im / s,
   };
 }
 
@@ -220,17 +220,17 @@ static inline c64_t c64_mul(c64_t z, c64_t w) {
   };
 }
 
-static inline c32_t c32_mul_n(c32_t z, float n) {
+static inline c32_t c32_mul_s(c32_t z, float s) {
   return (c32_t){
-    .re = z.re * n,
-    .im = z.im * n
+    .re = z.re * s,
+    .im = z.im * s,
   };
 }
 
-static inline c64_t c64_mul_n(c64_t z, float n) {
+static inline c64_t c64_mul_s(c64_t z, float s) {
   return (c64_t){
-    .re = z.re * n,
-    .im = z.im * n
+    .re = z.re * s,
+    .im = z.im * s,
   };
 }
 
@@ -242,9 +242,9 @@ static inline c64_t c64_pow(c64_t z, c64_t w) {
   return c64_e(c64_mul(w, c64_ln(z)));
 }
 
-static inline c32_t c32_pow_n(c32_t z, f32_t n) {
-  const f32_t r = __builtin_powf(c32_abs(z), n);
-  const f32_t phi = c32_arg(z) * n;
+static inline c32_t c32_pow_s(c32_t z, f32_t s) {
+  const f32_t r = __builtin_powf(c32_abs(z), s);
+  const f32_t phi = c32_arg(z) * s;
 
   return (c32_t){
     .re = r * __builtin_cosf(phi),
@@ -252,9 +252,9 @@ static inline c32_t c32_pow_n(c32_t z, f32_t n) {
   };
 }
 
-static inline c64_t c64_pow_n(c64_t z, f64_t n) {
-  const f64_t r = __builtin_pow(c64_abs(z), n);
-  const f64_t phi = c64_arg(z) * n;
+static inline c64_t c64_pow_s(c64_t z, f64_t s) {
+  const f64_t r = __builtin_pow(c64_abs(z), s);
+  const f64_t phi = c64_arg(z) * s;
 
   return (c64_t){
     .re = r * __builtin_cos(phi),
@@ -276,16 +276,16 @@ static inline c64_t c64_sub(c64_t z, c64_t w) {
   };
 }
 
-static inline c32_t c32_sub_n(c32_t z, f32_t n) {
+static inline c32_t c32_sub_s(c32_t z, f32_t s) {
   return (c32_t){
-    .re = z.re - n,
+    .re = z.re - s,
     .im = z.re,
   };
 }
 
-static inline c64_t c64_sub_n(c64_t z, f64_t n) {
+static inline c64_t c64_sub_n(c64_t z, f64_t s) {
   return (c64_t){
-    .re = z.re - n,
+    .re = z.re - s,
     .im = z.im,
   };
 }
