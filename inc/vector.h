@@ -331,7 +331,6 @@ struct u16_v4_s {
   };
 };
 
-
 struct i32_v2_s {
   union {
     i32_t e[2];
@@ -768,7 +767,7 @@ static inline f32_v2_t f32_v2_add(f32_v2_t a, f32_v2_t b) {
   return (f32_v2_t){
     .x = a.x + b.x,
     .y = a.y + b.y,
-  };  
+  };
 }
 
 static inline f32_v2_t f32_v2_add_s(f32_v2_t a, f32_t s) {
@@ -776,6 +775,46 @@ static inline f32_v2_t f32_v2_add_s(f32_v2_t a, f32_t s) {
     .x = a.x + s,
     .y = a.y + s,
   };
+}
+
+static inline void
+f32_v2_cartesian(f32_v2_t* domain, u32_v2_t shape, f32_v4_t bounds) {
+  u32_v2_t itr;
+  f32_v2_t point;
+  const f32_v2_t interval = (f32_v2_t){
+    .x = (bounds.bx - bounds.ax) / (f32_t)(shape.width - 1),
+    .y = (bounds.by - bounds.ay) / (f32_t)(shape.height - 1),
+  };
+
+  point.y = bounds.ay;
+  for (itr.y = 0; itr.y < shape.height; ++itr.y) {
+    point.x = bounds.ax;
+    for (itr.x = 0; itr.x < shape.width; ++itr.x) {
+      *domain++ = point;
+      point.x += interval.x;
+    }
+    point.y += interval.y;
+  }
+}
+
+static inline void
+f32_v2_cartesian_s(f32_v2_t* domain, u32_v2_t shape, f32_v4_t bounds) {
+  u32_v2_t itr;
+  f32_t point_y;
+  const f32_v2_t interval = (f32_v2_t){
+    .x = (bounds.bx - bounds.ax) / (f32_t)(shape.width - 1),
+    .y = (bounds.by - bounds.ay) / (f32_t)(shape.height - 1),
+  };
+
+  for (itr.y = 0; itr.y < shape.height; ++itr.y) {
+    point_y = bounds.ay + interval.y * itr.y;
+    for (itr.x = 0; itr.x < shape.width; ++itr.x) {
+      *domain++ = (f32_v2_t){
+        .x = bounds.ax + interval.x * itr.x,
+        .y = point_y,
+      };
+    }
+  }
 }
 
 static inline f32_t f32_v2_dist(f32_v2_t a, f32_v2_t b) {
@@ -866,7 +905,7 @@ static inline f64_v2_t f64_v2_add(f64_v2_t a, f64_v2_t b) {
   return (f64_v2_t){
     .x = a.x + b.x,
     .y = a.y + b.y,
-  };  
+  };
 }
 
 static inline f64_v2_t f64_v2_add_s(f64_v2_t a, f64_t s) {
@@ -874,6 +913,46 @@ static inline f64_v2_t f64_v2_add_s(f64_v2_t a, f64_t s) {
     .x = a.x + s,
     .y = a.y + s,
   };
+}
+
+static inline void
+f64_v2_cartesian(f64_v2_t* domain, u32_v2_t shape, f64_v4_t bounds) {
+  u32_v2_t itr;
+  f64_v2_t point;
+  const f64_v2_t interval = (f64_v2_t){
+    .x = (bounds.bx - bounds.ax) / (f64_t)(shape.width - 1),
+    .y = (bounds.by - bounds.ay) / (f64_t)(shape.height - 1),
+  };
+
+  point.y = bounds.ay;
+  for (itr.y = 0; itr.y < shape.height; ++itr.y) {
+    point.x = bounds.ax;
+    for (itr.x = 0; itr.x < shape.width; ++itr.x) {
+      *domain++ = point;
+      point.x += interval.x;
+    }
+    point.y += interval.y;
+  }
+}
+
+static inline void
+f64_v2_cartesian_s(f64_v2_t* domain, u32_v2_t shape, f64_v4_t bounds) {
+  u32_v2_t itr;
+  f64_t point_y;
+  const f64_v2_t interval = (f64_v2_t){
+    .x = (bounds.bx - bounds.ax) / (f64_t)(shape.width - 1),
+    .y = (bounds.by - bounds.ay) / (f64_t)(shape.height - 1),
+  };
+
+  for (itr.y = 0; itr.y < shape.height; ++itr.y) {
+    point_y = bounds.ay + interval.y * (f64_t)itr.y;
+    for (itr.x = 0; itr.x < shape.width; ++itr.x) {
+      *domain++ = (f64_v2_t){
+        .x = bounds.ax + interval.x * (f64_t)itr.x,
+        .y = point_y,
+      };
+    }
+  }
 }
 
 static inline f64_t f64_v2_dist(f64_v2_t a, f64_v2_t b) {
@@ -965,7 +1044,7 @@ static inline f32_v3_t f32_v3_add(f32_v3_t a, f32_v3_t b) {
     .x = a.x + b.x,
     .y = a.y + b.y,
     .z = a.z + b.z,
-  };  
+  };
 }
 
 static inline f32_v3_t f32_v3_add_s(f32_v3_t a, f32_t s) {
@@ -977,7 +1056,7 @@ static inline f32_v3_t f32_v3_add_s(f32_v3_t a, f32_t s) {
 }
 
 static inline f32_v3_t f32_v3_cross(f32_v3_t a, f32_v3_t b) {
-  return (f32_v3_t) {
+  return (f32_v3_t){
     .x = a.y * b.z - a.z * b.y,
     .y = a.z * b.x - a.x * b.z,
     .z = a.x * b.y - a.y * b.x,
@@ -1083,7 +1162,7 @@ static inline f64_v3_t f64_v3_add(f64_v3_t a, f64_v3_t b) {
     .x = a.x + b.x,
     .y = a.y + b.y,
     .z = a.z + b.z,
-  };  
+  };
 }
 
 static inline f64_v3_t f64_v3_add_s(f64_v3_t a, f64_t s) {
@@ -1095,7 +1174,7 @@ static inline f64_v3_t f64_v3_add_s(f64_v3_t a, f64_t s) {
 }
 
 static inline f64_v3_t f64_v3_cross(f64_v3_t a, f64_v3_t b) {
-  return (f64_v3_t) {
+  return (f64_v3_t){
     .x = a.y * b.z - a.z * b.y,
     .y = a.z * b.x - a.x * b.z,
     .z = a.x * b.y - a.y * b.x,
@@ -1202,7 +1281,7 @@ static inline f32_v4_t f32_v4_add(f32_v4_t a, f32_v4_t b) {
     .y = a.y + b.y,
     .z = a.z + b.z,
     .w = a.w + b.w,
-  };  
+  };
 }
 
 static inline f32_v4_t f32_v4_add_s(f32_v4_t a, f32_t s) {
@@ -1249,7 +1328,7 @@ static inline f32_v4_t f32_v4_max(f32_v4_t a, f32_v4_t b) {
     .x = (a.x > b.x) ? a.x : b.x,
     .y = (a.y > b.y) ? a.y : b.y,
     .z = (a.z > b.z) ? a.z : b.z,
-    .w = (a.w > b.w) ? a.w : b.w
+    .w = (a.w > b.w) ? a.w : b.w,
   };
 }
 
@@ -1258,7 +1337,7 @@ static inline f32_v4_t f32_v4_min(f32_v4_t a, f32_v4_t b) {
     .x = (a.x < b.x) ? a.x : b.x,
     .y = (a.y < b.y) ? a.y : b.y,
     .z = (a.z < b.z) ? a.z : b.z,
-    .w = (a.w < b.w) ? a.w : b.w
+    .w = (a.w < b.w) ? a.w : b.w,
   };
 }
 
@@ -1290,7 +1369,8 @@ static inline f32_v4_t f32_v4_neg(f32_v4_t v) {
 }
 
 static inline f32_v4_t f32_v4_norm(f32_v4_t v) {
-  const f32_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+  const f32_t mag =
+    __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
 
   return (f32_v4_t){
     .x = v.x / mag,
@@ -1324,7 +1404,7 @@ static inline f64_v4_t f64_v4_add(f64_v4_t a, f64_v4_t b) {
     .y = a.y + b.y,
     .z = a.z + b.z,
     .w = a.w + b.w,
-  };  
+  };
 }
 
 static inline f64_v4_t f64_v4_add_s(f64_v4_t a, f64_t s) {
@@ -1371,7 +1451,7 @@ static inline f64_v4_t f64_v4_max(f64_v4_t a, f64_v4_t b) {
     .x = (a.x > b.x) ? a.x : b.x,
     .y = (a.y > b.y) ? a.y : b.y,
     .z = (a.z > b.z) ? a.z : b.z,
-    .w = (a.w > b.w) ? a.w : b.w
+    .w = (a.w > b.w) ? a.w : b.w,
   };
 }
 
@@ -1380,7 +1460,7 @@ static inline f64_v4_t f64_v4_min(f64_v4_t a, f64_v4_t b) {
     .x = (a.x < b.x) ? a.x : b.x,
     .y = (a.y < b.y) ? a.y : b.y,
     .z = (a.z < b.z) ? a.z : b.z,
-    .w = (a.w < b.w) ? a.w : b.w
+    .w = (a.w < b.w) ? a.w : b.w,
   };
 }
 
@@ -1412,7 +1492,8 @@ static inline f64_v4_t f64_v4_neg(f64_v4_t v) {
 }
 
 static inline f64_v4_t f64_v4_norm(f64_v4_t v) {
-  const f64_t mag = __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+  const f64_t mag =
+    __builtin_sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
 
   return (f64_v4_t){
     .x = v.x / mag,
