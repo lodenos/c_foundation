@@ -1,8 +1,8 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
-#include "type.h"
-#include "vector.h"
+#include <type.h>
+#include <vector.h>
 
 typedef struct c32_s c32_t;
 typedef struct c64_s c64_t;
@@ -240,7 +240,7 @@ static inline c64_t c64_div_s(c64_t z, f64_t s) {
 
 static inline c32_t c32_e(c32_t z) {
   const f32_t r = __builtin_expf(z.re);
-  
+
   return (c32_t){
     .re = r * __builtin_cosf(z.im),
     .im = r * __builtin_sinf(z.im),
@@ -249,7 +249,7 @@ static inline c32_t c32_e(c32_t z) {
 
 static inline c64_t c64_e(c64_t z) {
   const f64_t r = __builtin_exp(z.re);
-  
+
   return (c64_t){
     .re = r * __builtin_cos(z.im),
     .im = r * __builtin_sin(z.im),
@@ -298,7 +298,7 @@ static inline c64_t* c64_grid_fill(c64_t* ctx, u32_v2_t frame, c64_v2_t bound) {
 
 static inline c32_t c32_ln(c32_t z) {
   const f32_t r = __builtin_sqrtf(z.re * z.re + z.im * z.im);
-  
+
   return (c32_t){
     .re = __builtin_logf(r),
     .im = __builtin_atan2f(z.im, z.re),
@@ -307,7 +307,7 @@ static inline c32_t c32_ln(c32_t z) {
 
 static inline c64_t c64_ln(c64_t z) {
   const f64_t r = __builtin_sqrt(z.re * z.re + z.im * z.im);
-  
+
   return (c64_t){
     .re = __builtin_log(r),
     .im = __builtin_atan2(z.im, z.re),
@@ -328,14 +328,14 @@ static inline c64_t c64_mul(c64_t z, c64_t w) {
   };
 }
 
-static inline c32_t c32_mul_s(c32_t z, float s) {
+static inline c32_t c32_mul_s(c32_t z, f32_t s) {
   return (c32_t){
     .re = z.re * s,
     .im = z.im * s,
   };
 }
 
-static inline c64_t c64_mul_s(c64_t z, float s) {
+static inline c64_t c64_mul_s(c64_t z, f64_t s) {
   return (c64_t){
     .re = z.re * s,
     .im = z.im * s,
@@ -451,11 +451,11 @@ static inline c64_t c64_sub(c64_t z, c64_t w) {
 static inline c32_t c32_sub_s(c32_t z, f32_t s) {
   return (c32_t){
     .re = z.re - s,
-    .im = z.re,
+    .im = z.im,
   };
 }
 
-static inline c64_t c64_sub_n(c64_t z, f64_t s) {
+static inline c64_t c64_sub_s(c64_t z, f64_t s) {
   return (c64_t){
     .re = z.re - s,
     .im = z.im,
@@ -479,14 +479,14 @@ static inline c64_t c64_tan(c64_t z) {
   const f64_t d = __builtin_cos(re_x2) + __builtin_cosh(im_x2);
 
   return (c64_t){
-    .re = __builtin_sinf(re_x2) / d,
-    .im = __builtin_sinhf(im_x2) / d,
+    .re = __builtin_sin(re_x2) / d,
+    .im = __builtin_sinh(im_x2) / d,
   };
 }
 
 static inline c32_t c32_tanh(c32_t z) {
   const f32_t re_x2 = z.re * 2.0f;
-  const f32_t im_x2 = z.im * 2.0f; 
+  const f32_t im_x2 = z.im * 2.0f;
   const f32_t d = __builtin_coshf(re_x2) + __builtin_cosf(im_x2);
 
   return (c32_t){
@@ -497,7 +497,7 @@ static inline c32_t c32_tanh(c32_t z) {
 
 static inline c64_t c64_tanh(c64_t z) {
   const f64_t re_x2 = z.re * 2.0;
-  const f64_t im_x2 = z.im * 2.0; 
+  const f64_t im_x2 = z.im * 2.0;
   const f64_t d = __builtin_cosh(re_x2) + __builtin_cos(im_x2);
 
   return (c64_t){
