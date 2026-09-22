@@ -96,7 +96,6 @@ struct matrix_init_s {
   u16_t entry_type;
 };
 
-//------------------------------------------------------------------------------
 // INFO: Prototypes
 
 static inline void
@@ -106,18 +105,37 @@ static inline void f64_m_row_scale(f64_m_t* m, u32_t row, f64_t s);
 static inline void f64_m_row_swap(f64_m_t* m, u32_t row_a, u32_t row_b);
 static inline void f64_m_zero(f64_m_t* m);
 
-//------------------------------------------------------------------------------
+// INFO: Constructor
 
 static inline f64_m_t* f64_m_new(f64_m_t** ctx) {
-  (void)ctx;
-  return NULL;
+  (*ctx) = (f64_m_t*)malloc(sizeof(f64_m_t));
+  if (!(*ctx))
+    return NULL;
+  (*ctx)->entries = (f64_t*)malloc(sizeof(f64_t));
+  if (!(*ctx)->entries) {
+    free(*ctx);
+    return NULL;
+  }
+  (*ctx)->shape = (u32_v2_t){1, 1};
+  return *ctx;
 }
 
 static inline f64_m_t* f64_m_new_init(f64_m_t** ctx, f64_m_init_t* init) {
-  (void)ctx;
-  (void)init;
-  return NULL;
+  const u32_t mn = init->shape.m * init->shape.n;
+
+  (*ctx) = (f64_m_t*)malloc(sizeof(f64_m_t) * mn);
+  if (!(*ctx))
+    return NULL;
+  (*ctx)->entries = (f64_t*)malloc(sizeof(f64_t) * mn);
+  if (!(*ctx)->entries) {
+    free(*ctx);
+    return NULL;
+  }
+  (*ctx)->shape = init->shape;
+  return *ctx;
 }
+
+// INFO: Destructor
 
 static inline void f64_m_delete(void* ctx) {
   f64_m_t* m = (f64_m_t*)ctx;
@@ -126,13 +144,13 @@ static inline void f64_m_delete(void* ctx) {
   free(m);
 }
 
-//------------------------------------------------------------------------------
+// INFO: Functions liks Methods
 
 static inline void f64_m_add(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
   const u32_t mn = a->shape.m * a->shape.n;
-  f64_t const* restrict a_e = a->entries;
-  f64_t const* restrict b_e = b->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* a_e = a->entries;
+  f64_t const* b_e = b->entries;
+  f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
     w_e[itr] = a_e[itr] + b_e[itr];
@@ -140,8 +158,8 @@ static inline void f64_m_add(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
 
 static inline void f64_m_add_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
   const u32_t mn = m->shape.m * m->shape.n;
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
     w_e[itr] = m_e[itr] + s;
@@ -149,8 +167,8 @@ static inline void f64_m_add_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
 
 static inline void f64_m_copy(f64_m_t const* m, f64_m_t* w) {
   const u32_t mn = m->shape.m * m->shape.n;
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
     w_e[itr] = m_e[itr];
@@ -194,8 +212,8 @@ static inline f64_t f64_m_det(f64_m_t const* m, f64_m_t* aux) {
 
 static inline void f64_m_div_e(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
   const u32_t mn = a->shape.m * a->shape.n;
-  f64_t const* restrict a_e = a->entries;
-  f64_t const* restrict b_e = b->entries;
+  f64_t const* a_e = a->entries;
+  f64_t const* b_e = b->entries;
   f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
@@ -204,7 +222,7 @@ static inline void f64_m_div_e(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
 
 static inline void f64_m_div_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
   const u32_t mn = m->shape.m * m->shape.n;
-  f64_t const* restrict m_e = m->entries;
+  f64_t const* m_e = m->entries;
   f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
@@ -213,8 +231,8 @@ static inline void f64_m_div_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
 
 static inline f64_t f64_m_dot(f64_m_t const* a, f64_m_t const* b) {
   const u32_t mn = a->shape.m * a->shape.n;
-  f64_t const* restrict a_e = a->entries;
-  f64_t const* restrict b_e = b->entries;
+  f64_t const* a_e = a->entries;
+  f64_t const* b_e = b->entries;
   f64_t sum;
 
   sum = 0.0;
@@ -271,12 +289,12 @@ static inline void f64_m_inv(f64_m_t const* m, f64_m_t* w, f64_m_t* aux) {
 }
 
 static inline void f64_m_mul(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
-  f64_t const* restrict a_e = a->entries;
-  f64_t const* restrict b_e = b->entries;
-  f64_t* restrict w_e = w->entries;
   u32_t const rows = a->shape.m;
   u32_t const inner = a->shape.n;
   u32_t const columns = b->shape.n;
+  f64_t const* a_e = a->entries;
+  f64_t const* b_e = b->entries;
+  f64_t* w_e = w->entries;
   f64_t sum;
 
   for (u32_t itr_row = 0; itr_row < rows; ++itr_row) {
@@ -292,9 +310,9 @@ static inline void f64_m_mul(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
 
 static inline void f64_m_mul_e(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
   const u32_t mn = a->shape.m * a->shape.n;
-  f64_t const* restrict a_e = a->entries;
-  f64_t const* restrict b_e = b->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* a_e = a->entries;
+  f64_t const* b_e = b->entries;
+  f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
     w_e[itr] = a_e[itr] * b_e[itr];
@@ -302,8 +320,8 @@ static inline void f64_m_mul_e(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
 
 static inline void f64_m_mul_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
   const u32_t mn = m->shape.m * m->shape.n;
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
     w_e[itr] = m_e[itr] * s;
@@ -311,9 +329,9 @@ static inline void f64_m_mul_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
 
 static inline void
 f64_m_mul_v2(f64_m_t const* m, f64_v2_t const* v, f64_m_t* w) {
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
   const u32_t rows = m->shape.m;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
   u32_t index;
 
   for (u32_t itr = 0; itr < rows; ++itr) {
@@ -324,9 +342,9 @@ f64_m_mul_v2(f64_m_t const* m, f64_v2_t const* v, f64_m_t* w) {
 
 static inline void
 f64_m_mul_v3(f64_m_t const* m, f64_v3_t const* v, f64_m_t* w) {
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
   const u32_t rows = m->shape.m;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
   u32_t index;
 
   for (u32_t itr = 0; itr < rows; ++itr) {
@@ -338,9 +356,9 @@ f64_m_mul_v3(f64_m_t const* m, f64_v3_t const* v, f64_m_t* w) {
 
 static inline void
 f64_m_mul_v4(f64_m_t const* m, f64_v4_t const* v, f64_m_t* w) {
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
   const u32_t rows = m->shape.m;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
   u32_t index;
 
   for (u32_t itr = 0; itr < rows; ++itr) {
@@ -360,16 +378,16 @@ f64_m_row_axpy(f64_m_t* m, u32_t row_a, u32_t row_b, f64_t s) {
 }
 
 static inline void f64_m_row_scale(f64_m_t* m, u32_t row, f64_t s) {
-  f64_t* m_e = m->entries;
   const u32_t columns = m->shape.n;
+  f64_t* m_e = m->entries;
 
   for (u32_t itr = 0; itr < columns; ++itr)
     m_e[row * columns + itr] *= s;
 }
 
 static inline void f64_m_row_swap(f64_m_t* m, u32_t row_a, u32_t row_b) {
-  f64_t* m_e = m->entries;
   const u32_t columns = m->shape.n;
+  f64_t* m_e = m->entries;
   f64_t value;
 
   for (u32_t itr = 0; itr < columns; ++itr) {
@@ -381,9 +399,9 @@ static inline void f64_m_row_swap(f64_m_t* m, u32_t row_a, u32_t row_b) {
 
 static inline void f64_m_sub(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
   const u32_t mn = a->shape.m * a->shape.n;
-  f64_t const* restrict a_e = a->entries;
-  f64_t const* restrict b_e = b->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* a_e = a->entries;
+  f64_t const* b_e = b->entries;
+  f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
     w_e[itr] = a_e[itr] - b_e[itr];
@@ -391,16 +409,16 @@ static inline void f64_m_sub(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
 
 static inline void f64_m_sub_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
   const u32_t mn = m->shape.m * m->shape.n;
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
 
   for (u32_t itr = 0; itr < mn; ++itr)
     w_e[itr] = m_e[itr] - s;
 }
 
 static inline void f64_m_transpose(f64_m_t const* m, f64_m_t* w) {
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
+  f64_t const* m_e = m->entries;
+  f64_t* w_e = w->entries;
   const u32_t rows = m->shape.m;
   const u32_t columns = m->shape.n;
 
