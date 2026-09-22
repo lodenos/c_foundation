@@ -156,15 +156,6 @@ static inline void f64_m_copy(f64_m_t const* m, f64_m_t* w) {
     w_e[itr] = m_e[itr];
 }
 
-static inline void f64_m_div_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
-  const u32_t mn = m->shape.m * m->shape.n;
-  f64_t const* restrict m_e = m->entries;
-  f64_t* restrict w_e = w->entries;
-
-  for (u32_t itr = 0; itr < mn; ++itr)
-    w_e[itr] = m_e[itr] / s;
-}
-
 static inline f64_t f64_m_det(f64_m_t const* m, f64_m_t* aux) {
   u32_t const rows = m->shape.m;
   u32_t const columns = m->shape.n;
@@ -199,6 +190,25 @@ static inline f64_t f64_m_det(f64_m_t const* m, f64_m_t* aux) {
     }
   }
   return (sign < 0) ? -det : det;
+}
+
+static inline void f64_m_div_e(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
+  const u32_t mn = a->shape.m * a->shape.n;
+  f64_t const* restrict a_e = a->entries;
+  f64_t const* restrict b_e = b->entries;
+  f64_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = a_e[itr] / b_e[itr];
+}
+
+static inline void f64_m_div_s(f64_m_t const* m, f64_t s, f64_m_t* w) {
+  const u32_t mn = m->shape.m * m->shape.n;
+  f64_t const* restrict m_e = m->entries;
+  f64_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = m_e[itr] / s;
 }
 
 static inline f64_t f64_m_dot(f64_m_t const* a, f64_m_t const* b) {
