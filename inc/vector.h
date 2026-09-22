@@ -51,6 +51,9 @@ struct i8_v2_s {
       i8_t a, b;
     };
     struct {
+      i8_t m, n;
+    };
+    struct {
       i8_t x, y;
     };
     struct {
@@ -121,6 +124,9 @@ struct u8_v2_s {
     u8_t element[2];
     struct {
       u8_t a, b;
+    };
+    struct {
+      u8_t m, n;
     };
     struct {
       u8_t x, y;
@@ -195,6 +201,9 @@ struct i16_v2_s {
       i16_t a, b;
     };
     struct {
+      i16_t m, n;
+    };
+    struct {
       i16_t x, y;
     };
     struct {
@@ -265,6 +274,9 @@ struct u16_v2_s {
     u16_t element[2];
     struct {
       u16_t a, b;
+    };
+    struct {
+      u16_t m, n;
     };
     struct {
       u16_t x, y;
@@ -339,6 +351,9 @@ struct i32_v2_s {
       i32_t a, b;
     };
     struct {
+      i32_t m, n;
+    };
+    struct {
       i32_t x, y;
     };
     struct {
@@ -409,6 +424,9 @@ struct u32_v2_s {
     u32_t element[2];
     struct {
       u32_t a, b;
+    };
+    struct {
+      u32_t m, n;
     };
     struct {
       u32_t x, y;
@@ -483,6 +501,9 @@ struct i64_v2_s {
       i64_t a, b;
     };
     struct {
+      i64_t m, n;
+    };
+    struct {
       i64_t x, y;
     };
     struct {
@@ -553,6 +574,9 @@ struct u64_v2_s {
     u64_t element[2];
     struct {
       u64_t a, b;
+    };
+    struct {
+      u64_t m, n;
     };
     struct {
       u64_t x, y;
@@ -627,6 +651,9 @@ struct f32_v2_s {
       f32_t a, b;
     };
     struct {
+      f32_t m, n;
+    };
+    struct {
       f32_t x, y;
     };
     struct {
@@ -697,6 +724,9 @@ struct f64_v2_s {
     f64_t element[2];
     struct {
       f64_t a, b;
+    };
+    struct {
+      f64_t m, n;
     };
     struct {
       f64_t x, y;
