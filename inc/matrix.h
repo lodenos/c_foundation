@@ -74,6 +74,10 @@ struct f32_m_s {
   f32_t* entries;
 };
 
+struct f32_m_init_s {
+  u32_v2_t shape;
+};
+
 struct f64_m_s {
   u32_v2_t shape;
   f64_t* entries;
@@ -99,6 +103,13 @@ struct matrix_init_s {
 // INFO: Prototypes
 
 static inline void
+f32_m_row_axpy(f32_m_t* m, u32_t row_a, u32_t row_b, f32_t s);
+
+static inline void f32_m_row_scale(f32_m_t* m, u32_t row, f32_t s);
+static inline void f32_m_row_swap(f32_m_t* m, u32_t row_a, u32_t row_b);
+static inline void f32_m_zero(f32_m_t* m);
+
+static inline void
 f64_m_row_axpy(f64_m_t* m, u32_t row_a, u32_t row_b, f64_t s);
 
 static inline void f64_m_row_scale(f64_m_t* m, u32_t row, f64_t s);
@@ -106,6 +117,35 @@ static inline void f64_m_row_swap(f64_m_t* m, u32_t row_a, u32_t row_b);
 static inline void f64_m_zero(f64_m_t* m);
 
 // INFO: Constructor
+
+static inline f32_m_t* f32_m_new(f32_m_t** ctx) {
+
+  (*ctx) = (f32_m_t*)malloc(sizeof(f32_m_t));
+  if (!(*ctx))
+    return NULL;
+  (*ctx)->entries = (f32_t*)malloc(sizeof(f32_t));
+  if (!(*ctx)->entries) {
+    free(*ctx);
+    return NULL;
+  }
+  (*ctx)->shape = (u32_v2_t){1, 1};
+  return *ctx;
+}
+
+static inline f32_m_t* f32_m_new_init(f32_m_t** ctx, f32_m_init_t* init) {
+  const u32_t mn = init->shape.m * init->shape.n;
+
+  (*ctx) = (f32_m_t*)malloc(sizeof(f32_m_t) * mn);
+  if (!(*ctx))
+    return NULL;
+  (*ctx)->entries = (f32_t*)malloc(sizeof(f32_t) * mn);
+  if (!(*ctx)->entries) {
+    free(*ctx);
+    return NULL;
+  }
+  (*ctx)->shape = init->shape;
+  return *ctx;
+}
 
 static inline f64_m_t* f64_m_new(f64_m_t** ctx) {
   (*ctx) = (f64_m_t*)malloc(sizeof(f64_m_t));
@@ -145,6 +185,295 @@ static inline void f64_m_delete(void* ctx) {
 }
 
 // INFO: Functions liks Methods
+
+static inline void f32_m_add(f32_m_t const* a, f32_m_t const* b, f32_m_t* w) {
+  const u32_t mn = a->shape.m * a->shape.n;
+  f32_t const* a_e = a->entries;
+  f32_t const* b_e = b->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = a_e[itr] + b_e[itr];
+}
+
+static inline void f32_m_add_s(f32_m_t const* m, f32_t s, f32_m_t* w) {
+  const u32_t mn = m->shape.m * m->shape.n;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = m_e[itr] + s;
+}
+
+static inline void f32_m_copy(f32_m_t const* m, f32_m_t* w) {
+  const u32_t mn = m->shape.m * m->shape.n;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = m_e[itr];
+}
+
+static inline f32_t f32_m_det(f32_m_t const* m, f32_m_t* aux) {
+  u32_t const rows = m->shape.m;
+  u32_t const columns = m->shape.n;
+  f32_t* aux_e = aux->entries;
+  f32_t det = 1.0f;
+  int sign = 1;
+
+  f32_m_copy(m, aux);
+  for (u32_t k = 0; k < rows; ++k) {
+    u32_t pivot = k;
+    f32_t max_abs = __builtin_fabsf(aux_e[k * columns + k]);
+    for (u32_t i = k + 1; i < rows; ++i) {
+      f32_t abs_v = __builtin_fabsf(aux_e[i * columns + k]);
+      if (abs_v > max_abs) {
+        max_abs = abs_v;
+        pivot = i;
+      }
+    }
+    if (pivot != k) {
+      f32_m_row_swap(aux, k, pivot);
+      sign = -sign;
+    }
+    {
+      f32_t diag = aux_e[k * columns + k];
+      det *= diag;
+      if (diag == 0.0f)
+        return 0.0f;
+      for (u32_t i = k + 1; i < rows; ++i) {
+        f32_t factor = aux_e[i * columns + k] / diag;
+        f32_m_row_axpy(aux, k, i, -factor);
+      }
+    }
+  }
+  return (sign < 0) ? -det : det;
+}
+
+static inline void f32_m_div_e(f32_m_t const* a, f32_m_t const* b, f32_m_t* w) {
+  const u32_t mn = a->shape.m * a->shape.n;
+  f32_t const* a_e = a->entries;
+  f32_t const* b_e = b->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = a_e[itr] / b_e[itr];
+}
+
+static inline void f32_m_div_s(f32_m_t const* m, f32_t s, f32_m_t* w) {
+  const u32_t mn = m->shape.m * m->shape.n;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = m_e[itr] / s;
+}
+
+static inline f32_t f32_m_dot(f32_m_t const* a, f32_m_t const* b) {
+  const u32_t mn = a->shape.m * a->shape.n;
+  f32_t const* a_e = a->entries;
+  f32_t const* b_e = b->entries;
+  f32_t sum;
+
+  sum = 0.0f;
+  for (u32_t itr = 0; itr < mn; ++itr)
+    sum += a_e[itr] * b_e[itr];
+  return sum;
+}
+
+static inline void f32_m_identity(f32_m_t* m) {
+  u32_t const rows = m->shape.m;
+  u32_t const columns = m->shape.n;
+  f32_t* m_e = m->entries;
+
+  f32_m_zero(m);
+  for (u32_t itr = 0; itr < rows; ++itr)
+    m_e[itr * columns + itr] = 1.0f;
+}
+
+static inline void f32_m_inv(f32_m_t const* m, f32_m_t* w, f32_m_t* aux) {
+  u32_t const rows = m->shape.m;
+  u32_t const columns = m->shape.n;
+  f32_t* aux_e = aux->entries;
+
+  f32_m_copy(m, aux);
+  f32_m_identity(w);
+  for (u32_t row = 0; row < rows; ++row) {
+    u32_t pivot = row;
+    f32_t max_abs = __builtin_fabsf(aux_e[row * columns + row]);
+    for (u32_t itr = row + 1; itr < rows; ++itr) {
+      f32_t abs_v = __builtin_fabsf(aux_e[itr * columns + row]);
+      if (abs_v > max_abs) {
+        max_abs = abs_v;
+        pivot = itr;
+      }
+    }
+    if (pivot != row) {
+      f32_m_row_swap(aux, row, pivot);
+      f32_m_row_swap(w, row, pivot);
+    }
+    {
+      f32_t inv_pivot = 1.0f / aux_e[row * columns + row];
+      f32_m_row_scale(aux, row, inv_pivot);
+      f32_m_row_scale(w, row, inv_pivot);
+    }
+    for (u32_t itr = 0; itr < rows; ++itr) {
+      f32_t factor;
+      if (itr == row)
+        continue;
+      factor = aux_e[itr * columns + row];
+      f32_m_row_axpy(aux, row, itr, -factor);
+      f32_m_row_axpy(w, row, itr, -factor);
+    }
+  }
+}
+
+static inline void f32_m_mul(f32_m_t const* a, f32_m_t const* b, f32_m_t* w) {
+  u32_t const rows = a->shape.m;
+  u32_t const inner = a->shape.n;
+  u32_t const columns = b->shape.n;
+  f32_t const* a_e = a->entries;
+  f32_t const* b_e = b->entries;
+  f32_t* w_e = w->entries;
+  f32_t sum;
+
+  for (u32_t itr_row = 0; itr_row < rows; ++itr_row) {
+    for (u32_t itr_column = 0; itr_column < columns; ++itr_column) {
+      sum = 0.0f;
+      for (u32_t itr_inner = 0; itr_inner < inner; ++itr_inner)
+        sum += a_e[itr_row * inner + itr_inner] *
+               b_e[itr_inner * columns + itr_column];
+      w_e[itr_row * columns + itr_column] = sum;
+    }
+  }
+}
+
+static inline void f32_m_mul_e(f32_m_t const* a, f32_m_t const* b, f32_m_t* w) {
+  const u32_t mn = a->shape.m * a->shape.n;
+  f32_t const* a_e = a->entries;
+  f32_t const* b_e = b->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = a_e[itr] * b_e[itr];
+}
+
+static inline void f32_m_mul_s(f32_m_t const* m, f32_t s, f32_m_t* w) {
+  const u32_t mn = m->shape.m * m->shape.n;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = m_e[itr] * s;
+}
+
+static inline void
+f32_m_mul_v2(f32_m_t const* m, f32_v2_t const* v, f32_m_t* w) {
+  const u32_t rows = m->shape.m;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+  u32_t index;
+
+  for (u32_t itr = 0; itr < rows; ++itr) {
+    index = itr * 2;
+    w_e[itr] = m_e[index] * v->x + m_e[index + 1] * v->y;
+  }
+}
+
+static inline void
+f32_m_mul_v3(f32_m_t const* m, f32_v3_t const* v, f32_m_t* w) {
+  const u32_t rows = m->shape.m;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+  u32_t index;
+
+  for (u32_t itr = 0; itr < rows; ++itr) {
+    index = itr * 3;
+    w_e[itr] =
+      m_e[index] * v->x + m_e[index + 1] * v->y + m_e[index + 2] * v->z;
+  }
+}
+
+static inline void
+f32_m_mul_v4(f32_m_t const* m, f32_v4_t const* v, f32_m_t* w) {
+  const u32_t rows = m->shape.m;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+  u32_t index;
+
+  for (u32_t itr = 0; itr < rows; ++itr) {
+    index = itr * 4;
+    w_e[itr] = m_e[index] * v->x + m_e[index + 1] * v->y +
+               m_e[index + 2] * v->z + m_e[index + 3] * v->w;
+  }
+}
+
+static inline void
+f32_m_row_axpy(f32_m_t* m, u32_t row_a, u32_t row_b, f32_t s) {
+  u32_t const columns = m->shape.n;
+  f32_t* m_e = m->entries;
+
+  for (u32_t itr = 0; itr < columns; ++itr)
+    m_e[row_b * columns + itr] += m_e[row_a * columns + itr] * s;
+}
+
+static inline void f32_m_row_scale(f32_m_t* m, u32_t row, f32_t s) {
+  const u32_t columns = m->shape.n;
+  f32_t* m_e = m->entries;
+
+  for (u32_t itr = 0; itr < columns; ++itr)
+    m_e[row * columns + itr] *= s;
+}
+
+static inline void f32_m_row_swap(f32_m_t* m, u32_t row_a, u32_t row_b) {
+  const u32_t columns = m->shape.n;
+  f32_t* m_e = m->entries;
+  f32_t value;
+
+  for (u32_t itr = 0; itr < columns; ++itr) {
+    value = m_e[row_a * columns + itr];
+    m_e[row_a * columns + itr] = m_e[row_b * columns + itr];
+    m_e[row_b * columns + itr] = value;
+  }
+}
+
+static inline void f32_m_sub(f32_m_t const* a, f32_m_t const* b, f32_m_t* w) {
+  const u32_t mn = a->shape.m * a->shape.n;
+  f32_t const* a_e = a->entries;
+  f32_t const* b_e = b->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = a_e[itr] - b_e[itr];
+}
+
+static inline void f32_m_sub_s(f32_m_t const* m, f32_t s, f32_m_t* w) {
+  const u32_t mn = m->shape.m * m->shape.n;
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    w_e[itr] = m_e[itr] - s;
+}
+
+static inline void f32_m_transpose(f32_m_t const* m, f32_m_t* w) {
+  f32_t const* m_e = m->entries;
+  f32_t* w_e = w->entries;
+  const u32_t rows = m->shape.m;
+  const u32_t columns = m->shape.n;
+
+  for (u32_t itr_row = 0; itr_row < rows; ++itr_row)
+    for (u32_t itr_column = 0; itr_column < columns; ++itr_column)
+      w_e[itr_column * rows + itr_row] = m_e[itr_row * columns + itr_column];
+}
+
+static inline void f32_m_zero(f32_m_t* m) {
+  u32_t const mn = m->shape.m * m->shape.n;
+  f32_t* m_e = m->entries;
+
+  for (u32_t itr = 0; itr < mn; ++itr)
+    m_e[itr] = 0.0f;
+}
 
 static inline void f64_m_add(f64_m_t const* a, f64_m_t const* b, f64_m_t* w) {
   const u32_t mn = a->shape.m * a->shape.n;
